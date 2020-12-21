@@ -7,6 +7,11 @@ export type RouteParramList = {
   Drawer: undefined;
 }
 
+export type RouteHomeList = {
+  Home: undefined;
+  Cart: undefined;
+}
+
 export type RouteStackParamList<T extends keyof RouteParramList> = {
   navigation: StackNavigationProp<RouteParramList, T>;
   route: RouteProp<RouteParramList, T>;

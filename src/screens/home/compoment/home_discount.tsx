@@ -1,9 +1,11 @@
 import React from "react"
-import { Image, Text } from "react-native"
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler"
+import { Text } from "react-native"
+import { FlatList } from "react-native-gesture-handler"
 import { Container } from "../../../share/styles/container"
 import styles from "../home_style"
 import { HomeStore } from "../store/home_store"
+import { Item } from "../../../share/item/item"
+
 
 export const HomeDiscount: React.FunctionComponent = ({ }) => {
   const { item } = HomeStore.useContainer()
@@ -15,14 +17,8 @@ export const HomeDiscount: React.FunctionComponent = ({ }) => {
         horizontal
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <TouchableOpacity>
-            <Container style={styles.discountItemContainer}>
-              <Image
-                source={{ uri: `${item.image}` }}
-                style={styles.imageSession}
-              />
-            </Container>
-          </TouchableOpacity>
+          <Item title="Khach san" rating={4} addToCart={() => console.log("add")} price={135}
+            moveToDetail={() => console.log("move")} image={item.image} inCart={true} />
         )} />
     )
   }

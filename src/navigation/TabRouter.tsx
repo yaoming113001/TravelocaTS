@@ -5,12 +5,13 @@ import { Categories } from "../screens/categories/categories";
 import { Search } from "../screens/search/search";
 import { Information } from "../screens/information/information";
 import { RouteStackParamList } from "./RouteParramList";
+import { HomeRoutes } from "./HomeRoute";
 
 export const DrawerRoutes: React.FunctionComponent<RouteStackParamList<"SignIn">> = ({ }) => {
     const Tab = createBottomTabNavigator();
     return (
         <Tab.Navigator initialRouteName="Home" >
-            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen name="Home" component={HomeRoutes} />
             <Tab.Screen name="Categories" component={Categories} />
             <Tab.Screen name="Search" component={Search} />
             <Tab.Screen name="Information" component={Information} />

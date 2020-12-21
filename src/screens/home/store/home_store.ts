@@ -7,7 +7,7 @@ export const useHomeStore = () => {
   const [image, setImage] = React.useState([
     {
       id: "1",
-      image: "https://pearlriverhotel.vn/wp-content/uploads/2019/07/pearl-river-hotel-home1.jpg",
+      image: "https://i.pinimg.com/736x/85/4b/31/854b31592e74f75e9715fa7c5bcbbd20.jpg",
       name: "hotel"
     },
     {

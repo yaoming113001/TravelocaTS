@@ -4,6 +4,10 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 export default StyleSheet.create({
+  container: {
+    paddingLeft: 10,
+    paddingRight: 10
+  },
   titleContainer: {
     width: width,
     height: 170,

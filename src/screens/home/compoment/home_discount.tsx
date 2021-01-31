@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native"
 import React from "react"
-import { Image, Text } from "react-native"
+import { Image, Button, Text } from "react-native"
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler"
 import { RouteHomeParamList } from "../../../navigation/RouteParramList"
 import { ItemVertical } from "../../../share/item_vertical/item_vertical"
@@ -8,10 +8,11 @@ import { Container } from "../../../share/styles/container"
 import { GlobalStore } from "../../../share/useStore/global_store"
 import styles from "../home_style"
 import { HomeStore } from "../store/home_store"
+import FlashMessage from "react-native-flash-message";
 
 export const HomeDiscount: React.FunctionComponent = ({ }) => {
-  const { item, addToCart } = HomeStore.useContainer()
-  const { list } = GlobalStore.useContainer().asyncStore;
+  const { item, addToCart, checkIfExist } = HomeStore.useContainer()
+  const { list } = GlobalStore.useContainer().asyncStore
 
   const navigation = useNavigation();
   const session = () => {
@@ -23,7 +24,7 @@ export const HomeDiscount: React.FunctionComponent = ({ }) => {
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <ItemVertical addCart={() => addToCart(item)} item={item} moveToDeteil={() => {
-            navigation.navigate("Detail")
+            navigation.navigate("Detail", { params: item })
           }} existInCart={true} />
 
         )} />
@@ -32,6 +33,8 @@ export const HomeDiscount: React.FunctionComponent = ({ }) => {
   return (
     <Container style={styles.discountContainer}>
       <Text style={styles.posterTitle}>Best discount for you $</Text>
+
+
       {session()}
     </Container>
   )

@@ -26,26 +26,26 @@ export const DrawerRoutes: React.FunctionComponent<RouteStackParamList<"SignIn">
                 name="Home"
                 component={HomeRoutes}
                 options={{
-                    tabBarIcon: ({ color }) => <FontAwesome name="home" size={30} color={color} />
+                    tabBarIcon: ({ color }) => <FontAwesome name="home" size={25} color={color} />
                 }}
             />
             <Tab.Screen
                 name="Categories"
                 component={Categories}
                 options={{
-                    tabBarIcon: ({ color }) => <FontAwesome name="book" size={30} color={color} />
+                    tabBarIcon: ({ color }) => <FontAwesome name="book" size={25} color={color} />
                 }} />
             <Tab.Screen
                 name="Search"
                 component={Search}
                 options={{
-                    tabBarIcon: ({ color }) => <FontAwesome name="search" size={30} color={color} />
+                    tabBarIcon: ({ color }) => <FontAwesome name="search" size={25} color={color} />
                 }} />
             <Tab.Screen
                 name="Information"
                 component={Information}
                 options={{
-                    tabBarIcon: ({ color }) => <FontAwesome name="user" size={26} color={color} />
+                    tabBarIcon: ({ color }) => <FontAwesome name="user" size={25} color={color} />
                 }}
             />
         </Tab.Navigator>

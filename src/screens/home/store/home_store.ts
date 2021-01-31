@@ -1,4 +1,4 @@
-import { isUndefined, result } from "lodash";
+import { isNil, isUndefined, result } from "lodash";
 import React, { useCallback, useState } from "react"
 import { createContainer } from "unstated-next"
 import { Item } from "../../../share/types/item";
@@ -37,7 +37,41 @@ export const useHomeStore = () => {
       id: "1",
       title: "Khach san 1 sao",
       image: "https://d2e5ushqwiltxm.cloudfront.net/wp-content/uploads/sites/92/2019/11/20071939/0919-AJS-NOI-Hotel-des-Arts-SGN-1275-Web-1500x690.jpg",
-      content: "Khach san dep vl",
+      content: "Khach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfs Khach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfs Khach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfsKhach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfs",
+      email: "Heolll@gmail.com",
+      phone: "0902449999",
+      price: 100,
+      rating: 4.5,
+      comment: [
+        {
+          id: "01",
+          title: "Khach san sddds",
+          rating: 3
+        }
+      ]
+    },
+    {
+      id: "2",
+      title: "Nha hang 1 sao",
+      image: "https://d2e5ushqwiltxm.cloudfront.net/wp-content/uploads/sites/92/2019/11/20071939/0919-AJS-NOI-Hotel-des-Arts-SGN-1275-Web-1500x690.jpg",
+      content: "Khach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfs Khach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfs Khach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfsKhach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfs",
+      email: "Heolll@gmail.com",
+      phone: "0902449999",
+      price: 100,
+      rating: 4.5,
+      comment: [
+        {
+          id: "01",
+          title: "Khach san sddds",
+          rating: 3
+        }
+      ]
+    },
+    {
+      id: "3",
+      title: "Da lat 1 sao",
+      image: "https://d2e5ushqwiltxm.cloudfront.net/wp-content/uploads/sites/92/2019/11/20071939/0919-AJS-NOI-Hotel-des-Arts-SGN-1275-Web-1500x690.jpg",
+      content: "Khach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfs Khach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfs Khach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfsKhach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfs",
       email: "Heolll@gmail.com",
       phone: "0902449999",
       price: 100,
@@ -52,24 +86,28 @@ export const useHomeStore = () => {
     },
   ])
 
+  const [listItem, setListItem] = React.useState<Item[]>([]);
 
-  const { getFromStore, storeToStorage, readStorage, list } = GlobalStore.useContainer().asyncStore;
+  const { storeToStorage, list } = GlobalStore.useContainer().asyncStore;
 
   const addToCart = React.useCallback((item: Item) => {
     storeToStorage(item);
+  }, [setListItem, list, storeToStorage])
+
+  const checkIfExist = React.useCallback((item: Item) => {
+    console.log(list)
+    if (!isNil(list) && list.find(x => x.id === item.id)) {
+      return true;
+    }
+    return false;
   }, [])
 
-
   React.useEffect(() => {
-    readStorage()
-    if (!isUndefined(list)) {
-      console.log("DO dai cua list", list.length)
-    } else {
-      console.log("khong doc dc", list)
-    }
-  }, []);
+    setListItem(list)
 
-  return { title, info, image, poster, item, addToCart };
+  }, [list]);
+
+  return { title, info, image, poster, item, addToCart, listItem, checkIfExist };
 }
 
 export const HomeStore = createContainer(useHomeStore);

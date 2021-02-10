@@ -9,6 +9,7 @@ import styles from "../../../share/styles/global_style"
 import { SignInStore } from "../store/sign_in_store"
 import * as Yup from "yup";
 import { StatusBar } from "expo-status-bar";
+import { ScrollView } from "react-native-gesture-handler";
 
 interface FormValue {
   email: string;
@@ -29,7 +30,7 @@ export const SignInSchema = Yup.object().shape({
 export const SignInScreen: React.FunctionComponent<RouteStackParamList<"SignIn">> = props => {
   const { title, info, submit, moveToSignUp } = SignInStore.useContainer()
   return (
-    <Container>
+    <ScrollView>
       <Container style={styles.titleContainer}>
         <Text style={styles.title}> {title}</Text>
         <Text style={styles.info}> {info}</Text>
@@ -79,7 +80,7 @@ export const SignInScreen: React.FunctionComponent<RouteStackParamList<"SignIn">
           </>
         )}
       </Formik>
-    </Container>
+    </ScrollView>
 
   )
 }

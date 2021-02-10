@@ -10,7 +10,7 @@ import styles from "../home_style"
 import { HomeStore } from "../store/home_store"
 
 export const HomeDiscount: React.FunctionComponent = ({ }) => {
-  const { item, addToCart, checkIfExist } = HomeStore.useContainer()
+  const { item, addToCart } = HomeStore.useContainer()
   const { list } = GlobalStore.useContainer().asyncStore
 
   const navigation = useNavigation();
@@ -31,9 +31,7 @@ export const HomeDiscount: React.FunctionComponent = ({ }) => {
   }
   return (
     <Container style={styles.discountContainer}>
-      <Text style={styles.posterTitle}>Best discount for you $</Text>
-
-
+      <Text style={styles.posterTitle}>Best discount for you $ {list.length}</Text>
       {session()}
     </Container>
   )

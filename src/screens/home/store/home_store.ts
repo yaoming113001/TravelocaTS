@@ -34,7 +34,7 @@ export const useHomeStore = () => {
 
   const [item, setItem] = React.useState<Item[]>([
     {
-      id: "1",
+      id: "01123",
       title: "Khach san 1 sao",
       image: "https://d2e5ushqwiltxm.cloudfront.net/wp-content/uploads/sites/92/2019/11/20071939/0919-AJS-NOI-Hotel-des-Arts-SGN-1275-Web-1500x690.jpg",
       content: "Khach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfs Khach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfs Khach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfsKhach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfs",
@@ -51,7 +51,7 @@ export const useHomeStore = () => {
       ]
     },
     {
-      id: "2",
+      id: "02562",
       title: "Nha hang 1 sao",
       image: "https://d2e5ushqwiltxm.cloudfront.net/wp-content/uploads/sites/92/2019/11/20071939/0919-AJS-NOI-Hotel-des-Arts-SGN-1275-Web-1500x690.jpg",
       content: "Khach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfs Khach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfs Khach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfsKhach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfs",
@@ -68,7 +68,7 @@ export const useHomeStore = () => {
       ]
     },
     {
-      id: "3",
+      id: "03145",
       title: "Da lat 1 sao",
       image: "https://d2e5ushqwiltxm.cloudfront.net/wp-content/uploads/sites/92/2019/11/20071939/0919-AJS-NOI-Hotel-des-Arts-SGN-1275-Web-1500x690.jpg",
       content: "Khach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfs Khach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfs Khach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfsKhach san dep vl sdffs fs fsdfklsjdlfs js sdfjslcsj sfl sdjfsj sldkfs l jsklj slkdfj sldfj skldjf skldj skldf skljfsl djfskldjfk sjdlkfj skldjs ldfs",
@@ -94,20 +94,11 @@ export const useHomeStore = () => {
     storeToStorage(item);
   }, [setListItem, list, storeToStorage])
 
-  const checkIfExist = React.useCallback((item: Item) => {
-    console.log(list)
-    if (!isNil(list) && list.find(x => x.id === item.id)) {
-      return true;
-    }
-    return false;
-  }, [])
-
   React.useEffect(() => {
     setListItem(list)
-
   }, [list]);
 
-  return { title, info, image, poster, item, addToCart, listItem, checkIfExist };
+  return { title, info, image, poster, item, addToCart, listItem };
 }
 
 export const HomeStore = createContainer(useHomeStore);

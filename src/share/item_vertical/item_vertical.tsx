@@ -5,6 +5,8 @@ import { TouchableOpacity } from "react-native-gesture-handler"
 import { Container } from "../styles/container"
 import { Item } from "../types/item"
 import styles from "./item_vertical_style"
+import { Overlay } from 'react-native-elements';
+import { Message } from "../message/message"
 
 interface IItem {
   item: Item;
@@ -14,6 +16,12 @@ interface IItem {
 }
 
 export const ItemVertical: React.FunctionComponent<IItem> = props => {
+  const [visible, setVisible] = React.useState(false);
+
+  const toggleOverlay = () => {
+    setVisible(!visible);
+  };
+
   return (
     <Container style={styles.itemContainer}>
       <TouchableOpacity onPress={() => props.moveToDeteil()} style={{ height: 150 }}>
@@ -42,10 +50,19 @@ export const ItemVertical: React.FunctionComponent<IItem> = props => {
               color={props.existInCart ? "red" : "gray"}
             />
           }
-          onPress={() => props.addCart()}
+          onPress={() => { props.addCart(), setVisible(true) }}
           buttonStyle={styles.iconItem}
         />
       </Container>
+      <Message
+        type="Add"
+        title="Add cart successfully"
+        isVisible={visible}
+        messageContent="You have added item successfully!"
+        onBackdropPress={() => { toggleOverlay() }}
+        yesButton={true}
+        submit={() => setVisible(false)}
+      />
     </Container>
   )
 }

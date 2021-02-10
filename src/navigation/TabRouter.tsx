@@ -12,7 +12,7 @@ export const DrawerRoutes: React.FunctionComponent<RouteStackParamList<"SignIn">
     const Tab = createBottomTabNavigator();
     return (
         <Tab.Navigator
-            initialRouteName="HomeRoutes"
+            initialRouteName="Home"
             tabBarOptions={{
                 labelStyle: {
                     fontSize: 14,

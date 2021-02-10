@@ -1,45 +1,77 @@
 import React from "react"
-import { Text, TouchableOpacity } from "react-native"
-import { Button } from "react-native-elements"
+import { Text, Image, Dimensions } from "react-native"
 import { RouteStackParamList } from "../../../navigation/RouteParramList"
-import { BaseInput } from "../../../share/base_input/base_input"
 import { Container } from "../../../share/styles/container"
-import styles from "../../../share/styles/global_style"
-import { InformationStore } from "../store/information_store"
+import { InformationStore, useInformationStore } from "../store/information_store"
+import { Button } from 'react-native-elements';
+import styles from "../information.style"
+import { ModalChangeUser } from "../../../share/modelChangeUser/modalChangeUser"
+import Moment from 'moment';
 
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 export const InformationScreen: React.FunctionComponent<RouteStackParamList<"SignIn">> = props => {
-  const { title, info } = InformationStore.useContainer()
+  const { accountImage, coverImage, toggleOverlay, visible } = InformationStore.useContainer()
+  const { user } = InformationStore.useContainer()
   return (
-    <Container>
-      <Container style={styles.titleContainer}>
-        <Text style={styles.title}> {title}</Text>
-        <Text style={styles.info}> {info}</Text>
-      </Container>
+    <Container style={{ flex: 1 }}>
+      <Image
+        source={{ uri: `${coverImage}` }}
+        style={{ flex: 1 }}
+      />
+      <Container style={styles.informationContainer}>
+        <Container style={{ flex: 2 }}>
+          <Container style={{ marginTop: 50, marginBottom: 10 }}>
+            <Text style={styles.titleName}>{user?.fullname}</Text>
+          </Container>
+          <Container horizontal style={{ marginTop: 10 }}>
+            <Text style={styles.title}>Account</Text>
+            <Text style={styles.titleInfo}>{user?.account}</Text>
+          </Container>
+          <Container horizontal style={{ marginTop: 10 }}>
+            <Text style={styles.title}>Password</Text>
+            <Text style={styles.titleInfo}>***********</Text>
+          </Container>
+          <Container horizontal style={{ marginTop: 10 }}>
+            <Text style={styles.title}>Email</Text>
+            <Text style={styles.titleInfo}>{user?.email}</Text>
+          </Container>
+          <Container horizontal style={{ marginTop: 10 }}>
+            <Text style={styles.title}>Phone</Text>
+            <Text style={styles.titleInfo}>{user?.phone}</Text>
+          </Container>
+          <Container horizontal style={{ marginTop: 10 }}>
+            <Text style={styles.title}>Birthday</Text>
+            <Text style={styles.titleInfo}>{Moment(user?.dateOfBirth).format("L")}</Text>
+          </Container>
+          <Container horizontal style={{ marginTop: 10 }}>
+            <Text style={styles.title}>Address</Text>
+            <Text style={styles.titleInfo}>35/1F Ba Diem Street</Text>
+          </Container>
+          <Container horizontal style={{ marginTop: 10 }}>
+            <Text style={styles.title}>Gender</Text>
+            <Text style={styles.titleInfo}>Male</Text>
+          </Container>
 
-      <Container style={styles.inputContainer}>
-        <BaseInput title="EMAIL"
-          placeholder="Enter email"
-          icon="envelope"
-          onChangeText={() => console.log("Hello")} />
-        <BaseInput title="PASSWORD" placeholder="Enter password" icon="lock" />
-        <Container style={styles.forgetContainer}>
-          <TouchableOpacity>
-            <Text style={styles.forget}>FORGET</Text>
-          </TouchableOpacity>
+        </Container>
+        <Container horizontal style={{ flex: 1, position: "relative", justifyContent: "center" }}>
+          <Button
+            title="Edit user"
+            onPress={() => toggleOverlay()}
+          />
         </Container>
       </Container>
+      <ModalChangeUser title={"Chage user's information"} isVisible={visible}
+        onBackdropPress={() => { toggleOverlay() }}></ModalChangeUser>
 
-      <Container style={styles.buttonContainer}>
-        <Button
-          title="Sign in"
-          buttonStyle={styles.button}
-          titleStyle={styles.buttonTitle}
-        />
-        <TouchableOpacity>
-          <Text style={styles.signUpTitle}>Sign up</Text>
-        </TouchableOpacity>
-      </Container>
+      <Image
+        source={{ uri: `${accountImage}` }}
+        style={{
+          position: "absolute", width: 100, height: 100, left: width / 2, top: 50, borderRadius: 50,
+          transform: [{ translateX: -50 }]
+        }}
+      />
     </Container>
   )
 }

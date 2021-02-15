@@ -1,36 +1,30 @@
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 import React from "react"
 import { createContainer } from "unstated-next"
-import { IUser } from "../../../share/types/user";
+import { IUserForm } from "../../../share/types/user_type";
 import { GlobalStore } from "../../../share/useStore/global_store";
-
-interface FormValue {
-  email: string;
-  password: string;
-}
+import jwt_decode from "jwt-decode";
+import { isUndefined } from "lodash";
 
 export const useSignInStore = () => {
   const navigation = useNavigation()
   const [title] = React.useState("Sign in");
   const [info] = React.useState(" Please sign in to continue");
+  const [message, setMessage] = React.useState<string>("")
 
-  const [user] = React.useState<IUser>({
-    id:"1",
-    account: "ducnguyen",
-    fullname: "duc phuoc nguyen",
-    password: "abcd",
-    email:"ducnguyen@123.com",
-    phone:"0123456789",
-    address:"34/1c ap hung lan",
-    dateOfBirth: new Date(),
-    gender:true,
-    })
+  const { storeUser, user } = GlobalStore.useContainer().userStore;
+  const { submitAuthen, decodeJWT } = GlobalStore.useContainer().useUserAPI;
 
-  const {storeUser} = GlobalStore.useContainer().userStore;
- 
-  const submit = React.useCallback((value: FormValue) => {
-    storeUser(user);
-    navigation.navigate("Drawer")
+  const submit = React.useCallback(async (value: IUserForm) => {
+    const result = await submitAuthen(value, "login");
+    if (result.data.error) {
+      setMessage(result.data.error);
+    } else {
+      let user: any = decodeJWT(result.data.token);
+      storeUser(user)
+      navigation.navigate("Drawer")
+    }
   }, [])
 
   const moveToSignUp = React.useCallback((props) => {
@@ -38,7 +32,11 @@ export const useSignInStore = () => {
 
   }, [])
 
-  return { title, info, submit, moveToSignUp };
+  React.useEffect(() => {
+    user.account?.length ? navigation.navigate("Drawer") : null
+  }, [user]);
+
+  return { title, info, submit, moveToSignUp, message, setMessage };
 }
 
 export const SignInStore = createContainer(useSignInStore);

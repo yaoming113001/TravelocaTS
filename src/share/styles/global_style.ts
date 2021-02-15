@@ -33,7 +33,7 @@ export default StyleSheet.create({
     minHeight: 250,
     paddingRight: 20,
     paddingLeft: 20,
-    marginTop: 80,
+    marginTop: 50,
 
   },
   imageBackground: {
@@ -56,6 +56,7 @@ export default StyleSheet.create({
     alignItems: "center",
     paddingRight: 20,
     paddingLeft: 20,
+    marginTop: 20
   },
   button: {
     width: width / 2,

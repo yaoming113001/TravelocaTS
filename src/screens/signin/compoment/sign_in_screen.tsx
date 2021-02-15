@@ -10,25 +10,17 @@ import { SignInStore } from "../store/sign_in_store"
 import * as Yup from "yup";
 import { StatusBar } from "expo-status-bar";
 import { ScrollView } from "react-native-gesture-handler";
-
-interface FormValue {
-  email: string;
-  password: string;
-}
-
-export const InitialData: FormValue = {
-  email: "",
-  password: ""
-}
+import { userLoginHelper } from "../../../share/helper/userHelper";
+import { Message } from "../../../share/message/message";
 
 export const SignInSchema = Yup.object().shape({
-  email: Yup.string().required("Email is required").email("Email must be a valid email"),
-  password: Yup.string().required("Password is required").min(10, "Password must larger than 10 characters")
+  account: Yup.string().required("Account is required"),
+  password: Yup.string().required("Password is required")
 })
 
 
 export const SignInScreen: React.FunctionComponent<RouteStackParamList<"SignIn">> = props => {
-  const { title, info, submit, moveToSignUp } = SignInStore.useContainer()
+  const { title, info, submit, moveToSignUp, message, setMessage } = SignInStore.useContainer()
   return (
     <ScrollView>
       <Container style={styles.titleContainer}>
@@ -36,21 +28,21 @@ export const SignInScreen: React.FunctionComponent<RouteStackParamList<"SignIn">
         <Text style={styles.info}> {info}</Text>
       </Container>
       <Formik
-        initialValues={InitialData}
+        initialValues={userLoginHelper}
         onSubmit={(value) => submit(value)}
         validationSchema={SignInSchema}>
         {(props) => (
           <>
             <Container style={styles.inputContainer}>
-              <BaseInput title="EMAIL"
-                placeholder="Enter email"
+              <BaseInput
+                placeholder="Enter account"
                 icon="envelope"
-                value={props.values.email}
-                error={props.touched.email ? props.errors.email : ""}
-                onChangeText={props.handleChange("email")}
-                onLostFocus={() => props.setFieldTouched("email")}
+                value={props.values.account}
+                error={props.touched.account ? props.errors.account : ""}
+                onChangeText={props.handleChange("account")}
+                onLostFocus={() => props.setFieldTouched("account")}
               />
-              <BaseInput title="PASSWORD"
+              <BaseInput
                 placeholder="Enter password"
                 icon="lock"
                 value={props.values.password}
@@ -80,6 +72,11 @@ export const SignInScreen: React.FunctionComponent<RouteStackParamList<"SignIn">
           </>
         )}
       </Formik>
+      <Message title={"Error"}
+        isVisible={message.length ? true : false}
+        messageContent={message}
+        yesButton={true}
+        submit={() => setMessage("")} />
     </ScrollView>
 
   )

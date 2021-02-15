@@ -2,23 +2,22 @@ import React from "react"
 import AsyncStore from "@react-native-community/async-storage"
 import { Item } from "../types/item"
 import { isNil, isUndefined } from "lodash"
-import { IUser } from "../types/user"
-import {userHelper} from "../helper/userHelper"
+import { userHelper } from "../helper/userHelper"
+import { IUserForm } from "../types/user_type"
 
 export const useUserStore = () => {
 
   const STORAGE_KEY = "userStore"
 
-  const [user, setUser] = React.useState<IUser>(userHelper);
+  const [user, setUser] = React.useState<IUserForm>(userHelper);
 
-  const storeUser = React.useCallback(async (user: IUser) => {
-      return await AsyncStore.setItem(STORAGE_KEY, JSON.stringify(user));
-
+  const storeUser = React.useCallback(async (user: IUserForm) => {
+    return await AsyncStore.setItem(STORAGE_KEY, JSON.stringify(user));
   }, [])
 
-  const deleteUser = React.useCallback(async ()=>{
+  const deleteUser = React.useCallback(async () => {
     return await AsyncStore.clear();
-  },[])
+  }, [])
 
 
   const getUser = React.useCallback(async () => {
@@ -26,10 +25,10 @@ export const useUserStore = () => {
     !isNil(value) ? setUser(JSON.parse(value)) : null;
   }, [])
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     getUser()
-  },[])
+  }, [])
 
-  
+
   return { storeUser, deleteUser, user, getUser };
 }

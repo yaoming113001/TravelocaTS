@@ -6,5 +6,5 @@ export interface IDateInputProps
   minDate?: Date;
   initialValue?: Date;
   title?: string;
-  onDateChanged?: (date: Date) => void;
+  onDateChanged?: (date: string) => void;
 }

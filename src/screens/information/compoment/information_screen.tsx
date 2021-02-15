@@ -7,12 +7,13 @@ import { Button } from 'react-native-elements';
 import styles from "../information.style"
 import { ModalChangeUser } from "../../../share/modelChangeUser/modalChangeUser"
 import Moment from 'moment';
+import { IUserForm } from "../../../share/types/user_type"
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 export const InformationScreen: React.FunctionComponent<RouteStackParamList<"SignIn">> = props => {
-  const { accountImage, coverImage, toggleOverlay, visible } = InformationStore.useContainer()
+  const { accountImage, coverImage, toggleOverlay, visible, editUserSubmit, isMessage, toggleMessage } = InformationStore.useContainer()
   const { user } = InformationStore.useContainer()
   return (
     <Container style={{ flex: 1 }}>
@@ -23,33 +24,33 @@ export const InformationScreen: React.FunctionComponent<RouteStackParamList<"Sig
       <Container style={styles.informationContainer}>
         <Container style={{ flex: 2 }}>
           <Container style={{ marginTop: 50, marginBottom: 10 }}>
-            <Text style={styles.titleName}>{user?.fullname}</Text>
+            <Text style={styles.titleName}>{user?.name}</Text>
           </Container>
-          <Container horizontal style={{ marginTop: 10 }}>
+          <Container horizontal style={styles.titleInfoContainer}>
             <Text style={styles.title}>Account</Text>
             <Text style={styles.titleInfo}>{user?.account}</Text>
           </Container>
-          <Container horizontal style={{ marginTop: 10 }}>
+          <Container horizontal style={styles.titleInfoContainer}>
             <Text style={styles.title}>Password</Text>
             <Text style={styles.titleInfo}>***********</Text>
           </Container>
-          <Container horizontal style={{ marginTop: 10 }}>
+          <Container horizontal style={styles.titleInfoContainer}>
             <Text style={styles.title}>Email</Text>
             <Text style={styles.titleInfo}>{user?.email}</Text>
           </Container>
-          <Container horizontal style={{ marginTop: 10 }}>
+          <Container horizontal style={styles.titleInfoContainer}>
             <Text style={styles.title}>Phone</Text>
             <Text style={styles.titleInfo}>{user?.phone}</Text>
           </Container>
-          <Container horizontal style={{ marginTop: 10 }}>
+          <Container horizontal style={styles.titleInfoContainer}>
             <Text style={styles.title}>Birthday</Text>
-            <Text style={styles.titleInfo}>{Moment(user?.dateOfBirth).format("L")}</Text>
+            <Text style={styles.titleInfo}>{Moment(Number(user?.dateBirth)).format("L")}</Text>
           </Container>
-          <Container horizontal style={{ marginTop: 10 }}>
+          <Container horizontal style={styles.titleInfoContainer}>
             <Text style={styles.title}>Address</Text>
             <Text style={styles.titleInfo}>35/1F Ba Diem Street</Text>
           </Container>
-          <Container horizontal style={{ marginTop: 10 }}>
+          <Container horizontal style={styles.titleInfoContainer}>
             <Text style={styles.title}>Gender</Text>
             <Text style={styles.titleInfo}>Male</Text>
           </Container>
@@ -63,7 +64,11 @@ export const InformationScreen: React.FunctionComponent<RouteStackParamList<"Sig
         </Container>
       </Container>
       <ModalChangeUser title={"Chage user's information"} isVisible={visible}
-        onBackdropPress={() => { toggleOverlay() }}></ModalChangeUser>
+        onBackdropPress={() => { toggleOverlay() }}
+        submit={(val: IUserForm) => editUserSubmit(val)}
+        message={isMessage}
+        onToggleMessage={() => toggleMessage()}
+      ></ModalChangeUser>
 
       <Image
         source={{ uri: `${accountImage}` }}

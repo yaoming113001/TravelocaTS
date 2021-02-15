@@ -18,4 +18,5 @@ export default StyleSheet.create({
   title: { flex: 2, fontSize: 18, fontWeight: "700", color: "#929292" },
   titleInfo: { flex: 5, fontSize: 18, fontWeight: "500", color: "#929292" },
   titleName: { textAlign: "center", fontSize: 24, fontWeight: "700", color: "#929292" },
+  titleInfoContainer: { marginTop: 20 }
 });

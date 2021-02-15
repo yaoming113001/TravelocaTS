@@ -18,6 +18,7 @@ export interface IBaseInputProps {
   onPressIcon?: () => void;
   onPress?: () => void;
   dontShowKeyboard?: boolean;
+  secure?: boolean
 }
 
 export const BaseInput: React.FunctionComponent<IBaseInputProps> = props => {
@@ -37,6 +38,7 @@ export const BaseInput: React.FunctionComponent<IBaseInputProps> = props => {
         onBlur={props.onLostFocus}
         inputStyle={{ fontSize: 14 }}
         onTouchEnd={props.onPress}
+        secureTextEntry={props.secure}
       />
     </>
   )

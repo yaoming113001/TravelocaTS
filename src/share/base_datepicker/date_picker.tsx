@@ -38,7 +38,7 @@ export const DatePicker: React.FunctionComponent<IDateInputProps> = props => {
   return (
     <>
       <BaseInput
-        value={isNil(date) ? "" : Moment(date).format("MM / DD / YYYY")}
+        value={isNil(props.initialValue) ? "" : Moment(props.initialValue).format("MM / DD / YYYY")}
         onPress={showPicker}
         dontShowKeyboard={true}
       />

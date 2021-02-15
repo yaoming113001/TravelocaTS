@@ -10,7 +10,7 @@ export const Routes: React.FunctionComponent = ({ }) => {
   const Stack = createStackNavigator<RouteParramList>();
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Drawer" headerMode={"none"}>
+      <Stack.Navigator initialRouteName="SignIn" headerMode={"none"}>
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Drawer" component={DrawerRoutes} />

@@ -6,7 +6,7 @@ import { Button } from 'react-native-elements';
 import styles from "./message.style"
 
 interface IMessage {
-  type: string;
+  type?: string;
   title: string;
   isVisible: boolean;
   yesButton?: boolean;
@@ -15,14 +15,17 @@ interface IMessage {
   cancelLabel?: string;
   submit?: () => void;
   onCancelPress?: () => void;
-  onBackdropPress?: () => void;
+  onBackdropPress: () => void;
 
 }
 
 export const Message: React.FunctionComponent<IMessage> = props => {
   return (
     <Container>
-      <Overlay overlayStyle={{ borderRadius: 20 }} isVisible={props.isVisible} onBackdropPress={props.onBackdropPress}>
+      <Overlay overlayStyle={{ borderRadius: 20 }}
+        isVisible={props.isVisible}
+        onBackdropPress={props.onBackdropPress}
+        animationType="fade">
         <Container style={styles.container}>
           <Text style={[props.type === "Add" ? styles.colorAdd : styles.colorDelete, styles.title]}>{props.title}</Text>
           <Container style={styles.containerContentMessage}>
@@ -32,7 +35,7 @@ export const Message: React.FunctionComponent<IMessage> = props => {
             <Button
               title="Go back"
               type="outline"
-              disabled={!props.noButton}
+              buttonStyle={{ display: !props.noButton ? "none" : "flex" }}
               onPress={props.onCancelPress}
             />
             <Button

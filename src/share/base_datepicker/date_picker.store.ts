@@ -19,7 +19,7 @@ export const useDateInput = (props: IDateInputProps) => {
 
   const onPressDone = React.useCallback(() => {
     hidePicker();
-    props.onDateChanged && props.onDateChanged(date);
+    props.onDateChanged && props.onDateChanged(date.getTime().toString());
   }, [date, props, hidePicker]);
 
   const onChangeDateAndroid = React.useCallback(

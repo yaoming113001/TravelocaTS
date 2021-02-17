@@ -1,13 +1,16 @@
 export interface Item {
-  id: string;
-  title: string;
-  content: string;
-  comment: Comment[];
-  price: number;
-  image: string;
-  phone: string;
-  email: string;
-  rating: number
+  address: string,
+  city: number,
+  content: string,
+  email: string,
+  id: number,
+  image: string,
+  is_active: number,
+  phoneNumber: number,
+  price: number,
+  title: string,
+  type: number,
+  vote: number,
 }
 
 export interface Comment {

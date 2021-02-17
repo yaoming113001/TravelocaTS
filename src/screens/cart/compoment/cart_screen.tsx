@@ -18,14 +18,19 @@ export const CartScreen: React.FunctionComponent<RouteStackParamList<"SignIn">> 
         showsHorizontalScrollIndicator={false}
         data={listItem}
         alwaysBounceVertical
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
         style={{ height: "83%" }}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
-          <ItemHorizontal item={item} moveToDeteil={() => {
-            navigation.navigate("Detail", { params: item })
-          }} existInCart={true}
-            deleteItem={() => deleteItemCart(item)} />
+          <ItemHorizontal
+            item={item}
+            moveToDeteil={() => {
+              navigation.navigate("Detail", { params: item })
+            }}
+            existInCart={true}
+            deleteItem={() => deleteItemCart(item)}
+            isCart={true}
+            addCart={() => { }} />
 
         )} />
     )

@@ -1,44 +1,36 @@
+import { useNavigation } from "@react-navigation/native"
 import React from "react"
 import { Text, TouchableOpacity } from "react-native"
 import { Button } from "react-native-elements"
-import { RouteStackParamList } from "../../../navigation/RouteParramList"
+import { FlatList } from "react-native-gesture-handler"
+import { HomeStackParamList, RouteStackParamList } from "../../../navigation/RouteParramList"
 import { BaseInput } from "../../../share/base_input/base_input"
+import { Header } from "../../../share/header/header"
+import { ItemHorizontal } from "../../../share/item_horizontal/item_horizontal"
 import { Container } from "../../../share/styles/container"
 import styles from "../../../share/styles/global_style"
+import { Item } from "../../../share/types/item"
+import { GlobalStore } from "../../../share/useStore/global_store"
 import { CategoriesStore } from "../store/categories_store"
 
 
-export const CategoriesScreen: React.FunctionComponent<RouteStackParamList<"SignIn">> = props => {
-  const { title, info } = CategoriesStore.useContainer()
+export const CategoriesScreen: React.FunctionComponent<HomeStackParamList<"Category">> = props => {
+  const navigation = useNavigation()
+  const { items, checkCatagory, addToCart } = CategoriesStore.useContainer();
+
   return (
-    <Container>
-      <Container style={styles.titleContainer}>
-        <Text style={styles.title}> {title}</Text>
-        <Text style={styles.info}> {info}</Text>
-      </Container>
-
-      <Container style={styles.inputContainer}>
-        <BaseInput title="EMAIL"
-          placeholder="Enter email"
-          icon="envelope"
-          onChangeText={() => console.log("Hello")} />
-        <BaseInput title="PASSWORD" placeholder="Enter password" icon="lock" />
-        <Container style={styles.forgetContainer}>
-          <TouchableOpacity>
-            <Text style={styles.forget}>FORGET</Text>
-          </TouchableOpacity>
-        </Container>
-      </Container>
-
-      <Container style={styles.buttonContainer}>
-        <Button
-          title="Sign in"
-          buttonStyle={styles.button}
-          titleStyle={styles.buttonTitle}
-        />
-        <TouchableOpacity>
-          <Text style={styles.signUpTitle}>Sign up</Text>
-        </TouchableOpacity>
+    <Container style={styles.container}>
+      <Header iconTitle={"arrow-left"} mainScreen={false} onPress={() => navigation.goBack()} title={checkCatagory()} />
+      <Container style={{ marginBottom: 110 }}>
+        <FlatList
+          showsHorizontalScrollIndicator={true}
+          data={items}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({ item }) => (
+            <ItemHorizontal item={item} existInCart={true} isCart={false}
+              moveToDeteil={() => navigation.navigate("Detail", { params: item })}
+              deleteItem={() => { }} addCart={() => addToCart(item)} />
+          )} />
       </Container>
     </Container>
   )

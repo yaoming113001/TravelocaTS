@@ -20,7 +20,7 @@ export const HomeDiscount: React.FunctionComponent = ({ }) => {
         showsHorizontalScrollIndicator={false}
         data={item}
         horizontal
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
         renderItem={({ item }) => (
           <ItemVertical addCart={() => addToCart(item)} item={item} moveToDeteil={() => {
             navigation.navigate("Detail", { params: item })

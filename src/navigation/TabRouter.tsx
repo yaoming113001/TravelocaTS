@@ -30,12 +30,6 @@ export const DrawerRoutes: React.FunctionComponent<RouteStackParamList<"SignIn">
                 }}
             />
             <Tab.Screen
-                name="Categories"
-                component={Categories}
-                options={{
-                    tabBarIcon: ({ color }) => <FontAwesome name="book" size={25} color={color} />
-                }} />
-            <Tab.Screen
                 name="Search"
                 component={Search}
                 options={{

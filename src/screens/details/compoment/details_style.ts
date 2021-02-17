@@ -58,7 +58,7 @@ export default StyleSheet.create({
   },
   phoneIconDetail: {
     color: "white",
-    padding: 10
+    padding: 10,
   },
   emailDetail: {
     fontSize: 18,

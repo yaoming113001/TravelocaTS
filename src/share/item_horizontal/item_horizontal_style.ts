@@ -10,7 +10,7 @@ export default StyleSheet.create({
     borderRadius: 8
   },
   itemContainer: {
-    marginTop: 20,
+    marginBottom: 20,
     width: "100%",
     marginRight: 10,
     borderRadius: 10,

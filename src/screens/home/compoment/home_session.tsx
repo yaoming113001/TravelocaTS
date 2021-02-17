@@ -6,7 +6,7 @@ import styles from "../home_style"
 import { HomeStore } from "../store/home_store"
 
 export const HomeSession: React.FunctionComponent = ({ }) => {
-  const { image } = HomeStore.useContainer()
+  const { image, gotoCatetory } = HomeStore.useContainer()
   const session = () => {
     return (
       <FlatList
@@ -15,7 +15,7 @@ export const HomeSession: React.FunctionComponent = ({ }) => {
         horizontal
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => gotoCatetory(Number(item.id))} >
             <Container style={styles.containerSession}>
               <Image
                 source={{ uri: `${item.image}` }}

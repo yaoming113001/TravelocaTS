@@ -11,8 +11,9 @@ interface IItem {
   item: Item;
   existInCart: boolean;
   moveToDeteil: () => void;
-  addCart?: () => void;
+  addCart: () => void;
   deleteItem: () => void;
+  isCart: boolean;
 }
 
 export const ItemHorizontal: React.FunctionComponent<IItem> = props => {
@@ -36,7 +37,7 @@ export const ItemHorizontal: React.FunctionComponent<IItem> = props => {
       <Container horizontal style={styles.justifyContainer}>
         <Rating
           type='heart'
-          startingValue={props.item.rating}
+          startingValue={props.item.vote}
           imageSize={26}
         />
         <Button
@@ -53,14 +54,14 @@ export const ItemHorizontal: React.FunctionComponent<IItem> = props => {
         />
       </Container>
       <Message
-        type={"Delete"}
-        title="Delete item"
+        type={props.isCart ? "Delete" : "Add"}
+        title={props.isCart ? "Delete item" : "Add item successfully"}
         isVisible={visible}
-        messageContent="Do you really want to delete item from the cart ?"
+        messageContent={props.isCart ? "Do you really want to delete item from the cart ?" : "You have added item successfully!"}
         onBackdropPress={() => { toggleOverlay() }}
         yesButton={true}
-        noButton={true}
-        submit={() => { setVisible(false), props.deleteItem() }}
+        noButton={props.isCart}
+        submit={() => { setVisible(false), props.isCart ? props.deleteItem() : props.addCart() }}
         onCancelPress={() => setVisible(false)}
       />
     </Container>

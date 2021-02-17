@@ -38,7 +38,7 @@ export default StyleSheet.create({
     },
     imagePoster1: {
         width: "100%",
-        height: "100%",
+        height: "120%",
         borderRadius: 5,
     },
     imagePoster2: {
@@ -78,17 +78,17 @@ export default StyleSheet.create({
         borderWidth: 2,
         borderColor: "#f73b4c"
     },
-    discountImage:{
+    discountImage: {
         width: "100%",
         height: 140
     },
-    discountTitle:{
+    discountTitle: {
         fontSize: 18,
-        fontWeight:"600",
+        fontWeight: "600",
         padding: 10
     },
-    starContainer:{ alignItems: "center", justifyContent: "space-between", flexDirection: "row", paddingLeft: 10, paddingRight: 10 },
-    rating:{ fontSize: 14 },
-    priceAndHeartContainer:{ alignItems: "center", justifyContent: "space-between", flexDirection: "row", paddingLeft: 10 },
-    price:{ color: "red", fontSize: 20, fontWeight: "bold" }
+    starContainer: { alignItems: "center", justifyContent: "space-between", flexDirection: "row", paddingLeft: 10, paddingRight: 10 },
+    rating: { fontSize: 14 },
+    priceAndHeartContainer: { alignItems: "center", justifyContent: "space-between", flexDirection: "row", paddingLeft: 10 },
+    price: { color: "red", fontSize: 20, fontWeight: "bold" }
 });

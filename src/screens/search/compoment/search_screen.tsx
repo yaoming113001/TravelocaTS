@@ -1,44 +1,66 @@
 import React from "react"
-import { Text, TouchableOpacity } from "react-native"
-import { Button } from "react-native-elements"
+import { Text } from "react-native"
 import { RouteStackParamList } from "../../../navigation/RouteParramList"
-import { BaseInput } from "../../../share/base_input/base_input"
 import { Container } from "../../../share/styles/container"
 import styles from "../../../share/styles/global_style"
-import { SearchStore } from "../store/search_store"
-
+import { SearchBar } from 'react-native-elements';
+import { Header } from "react-native/Libraries/NewAppScreen";
+import { SearchStore } from "../store/search_store";
+import { FlatList } from "react-native-gesture-handler";
+import { ItemHorizontal } from "../../../share/item_horizontal/item_horizontal";
+import { useNavigation } from "@react-navigation/native";
 
 export const SearchScreen: React.FunctionComponent<RouteStackParamList<"SignIn">> = props => {
-  const { title, info } = SearchStore.useContainer()
+  const { searchPost, items, addToCart, searchKey } = SearchStore.useContainer();
+  const navigation = useNavigation()
+
+  const hasKeyword = () => {
+    return (
+      <>
+        <FlatList
+          showsHorizontalScrollIndicator={true}
+          data={items}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({ item }) => (
+            <ItemHorizontal item={item} existInCart={true} isCart={false}
+              moveToDeteil={() => navigation.navigate("Detail", { params: item })}
+              deleteItem={() => { }} addCart={() => addToCart(item)} />
+          )} />
+      </>
+    )
+  }
+  const noKeyword = () => {
+    return (
+      <>
+        <Text style={{ textAlign: "center", marginTop: 10, fontSize: 16, fontWeight: "bold" }}>Search item...</Text>
+      </>
+    )
+  }
+
+  const noResult = () => {
+    return (
+      <>
+        <Text style={{ textAlign: "center", marginTop: 10, fontSize: 16, fontWeight: "bold" }}>
+          No item has been found...</Text>
+      </>
+    )
+  }
+
+  const result = searchKey === "" ? noKeyword : items.length === 0 ? noResult : hasKeyword;
+
   return (
-    <Container>
-      <Container style={styles.titleContainer}>
-        <Text style={styles.title}> {title}</Text>
-        <Text style={styles.info}> {info}</Text>
-      </Container>
-
-      <Container style={styles.inputContainer}>
-        <BaseInput title="EMAIL"
-          placeholder="Enter email"
-          icon="envelope"
-          onChangeText={() => console.log("Hello")} />
-        <BaseInput title="PASSWORD" placeholder="Enter password" icon="lock" />
-        <Container style={styles.forgetContainer}>
-          <TouchableOpacity>
-            <Text style={styles.forget}>FORGET</Text>
-          </TouchableOpacity>
-        </Container>
-      </Container>
-
-      <Container style={styles.buttonContainer}>
-        <Button
-          title="Sign in"
-          buttonStyle={styles.button}
-          titleStyle={styles.buttonTitle}
-        />
-        <TouchableOpacity>
-          <Text style={styles.signUpTitle}>Sign up</Text>
-        </TouchableOpacity>
+    <Container style={{ marginTop: 30 }}>
+      <SearchBar
+        placeholder="Type Here..."
+        onChangeText={(value) => { searchPost(value) }}
+        value={searchKey}
+        showCancel
+        lightTheme
+        inputContainerStyle={{ height: 35, backgroundColor: "white" }}
+        containerStyle={{ padding: 5 }}
+      />
+      <Container style={{ marginBottom: 110, padding: 15 }}>
+        {result()}
       </Container>
     </Container>
   )

@@ -8,6 +8,7 @@ import { DrawerRoutes } from "./TabRouter"
 import { Home } from "../screens/home/home";
 import { Details } from "../screens/details/details";
 import { Cart } from "../screens/cart/cart";
+import { Categories } from "../screens/categories/categories";
 
 export const HomeRoutes: React.FunctionComponent = ({ }) => {
   const Stack = createStackNavigator<RouteHomeParamList>();
@@ -16,6 +17,7 @@ export const HomeRoutes: React.FunctionComponent = ({ }) => {
       <Stack.Screen name="Detail" component={Details} />
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Cart" component={Cart} />
+      <Stack.Screen name="Category" component={Categories} />
 
     </Stack.Navigator>
   )

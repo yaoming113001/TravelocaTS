@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native-gesture-handler"
 import { Container } from "../styles/container"
 import { Item } from "../types/item"
 import styles from "./item_vertical_style"
-import { Overlay } from 'react-native-elements';
+import NumberFormat from 'react-number-format';
 import { Message } from "../message/message"
 
 interface IItem {
@@ -32,15 +32,19 @@ export const ItemVertical: React.FunctionComponent<IItem> = props => {
       </TouchableOpacity>
       <Text style={styles.itemTitle} numberOfLines={1}>{props.item.title}</Text>
       <Container horizontal style={styles.justifyContainer}>
-        <Rating
-          type='heart'
-          startingValue={props.item.rating}
-          imageSize={26}
-        />
-        <Text style={styles.ratingNumber}>{props.item.rating}</Text>
+        <TouchableOpacity>
+          <Rating
+            type='heart'
+            startingValue={props.item.vote}
+            imageSize={26}
+          />
+        </TouchableOpacity>
       </Container>
       <Container horizontal style={styles.justifyContainer}>
-        <Text style={styles.price}>{props.item.price}$</Text>
+        <NumberFormat value={props.item.price} displayType={'text'} thousandSeparator={true} prefix={''} renderText={value =>
+          <Text style={styles.price}>{value}</Text>
+        }
+        />
         <Button
           icon={
             <Icon

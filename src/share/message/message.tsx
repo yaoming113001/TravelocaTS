@@ -15,7 +15,7 @@ interface IMessage {
   cancelLabel?: string;
   submit?: () => void;
   onCancelPress?: () => void;
-  onBackdropPress: () => void;
+  onBackdropPress?: () => void;
 
 }
 

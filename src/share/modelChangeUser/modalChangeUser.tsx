@@ -38,7 +38,6 @@ export const EditUserSchema = Yup.object().shape({
 
 export const ModalChangeUser: React.FunctionComponent<IModalChangeUser> = props => {
   const { user } = GlobalStore.useContainer().userStore;
-  console.log(props.message)
   return (
     <Container>
       <Overlay

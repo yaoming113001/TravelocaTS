@@ -21,6 +21,14 @@ export const useAPIPostStore = () => {
       });
   }, [])
 
+  const deletePost = React.useCallback(<T>(url: string, object: T) => {
+    return axios
+      .delete(`${ipconfig}posts/${url}`, object)
+      .then(result => {
+        return result
+      });
+  }, [])
 
-  return { getPost, postPost };
+
+  return { getPost, postPost, deletePost };
 }

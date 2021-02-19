@@ -5,6 +5,7 @@ export type RouteParramList = {
   SignIn: undefined;
   SignUp: undefined;
   Drawer: undefined;
+  Welcome: undefined;
 }
 
 export type RouteHomeParamList = {

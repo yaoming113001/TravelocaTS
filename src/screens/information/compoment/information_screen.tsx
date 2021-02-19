@@ -6,15 +6,45 @@ import { InformationStore, useInformationStore } from "../store/information_stor
 import { Button } from 'react-native-elements';
 import styles from "../information.style"
 import { ModalChangeUser } from "../../../share/modelChangeUser/modalChangeUser"
-import Moment from 'moment';
 import { IUserForm } from "../../../share/types/user_type"
+import { InformationBoard } from "./information_board"
+import { HasntLoggin } from "./no_information"
 
-const width = Dimensions.get("window").width;
-const height = Dimensions.get("window").height;
+export const InformationScreen: React.FunctionComponent<RouteStackParamList<"Drawer">> = props => {
+  const { accountImage, coverImage, toggleOverlay, visible, editUserSubmit, isMessage, toggleMessage
+    , navigateToSignIn, navigateToRegister } = InformationStore.useContainer()
+  const { user, deleteUser } = InformationStore.useContainer()
 
-export const InformationScreen: React.FunctionComponent<RouteStackParamList<"SignIn">> = props => {
-  const { accountImage, coverImage, toggleOverlay, visible, editUserSubmit, isMessage, toggleMessage } = InformationStore.useContainer()
-  const { user } = InformationStore.useContainer()
+  const logged = () => {
+    return (
+      <>
+        <InformationBoard user={user} />
+        <Container style={styles.buttonContainer}>
+          <Button
+            title="Edit user"
+            onPress={() => toggleOverlay()}
+            buttonStyle={styles.button}
+          />
+          <Button
+            title="Logout"
+            type="clear"
+            onPress={() => deleteUser()}
+            buttonStyle={styles.button}
+          />
+        </Container>
+      </>
+    )
+  }
+
+  const hasntLoggin = () => {
+    return (
+      <>
+        <HasntLoggin navigateToRegister={() => navigateToRegister()} navigateToSignIn={() => navigateToSignIn()} />
+      </>
+    )
+  }
+
+  const content = user.id !== 0 ? logged() : hasntLoggin()
   return (
     <Container style={{ flex: 1 }}>
       <Image
@@ -22,60 +52,19 @@ export const InformationScreen: React.FunctionComponent<RouteStackParamList<"Sig
         style={{ flex: 1 }}
       />
       <Container style={styles.informationContainer}>
-        <Container style={{ flex: 2 }}>
-          <Container style={{ marginTop: 50, marginBottom: 10 }}>
-            <Text style={styles.titleName}>{user?.name}</Text>
-          </Container>
-          <Container horizontal style={styles.titleInfoContainer}>
-            <Text style={styles.title}>Account</Text>
-            <Text style={styles.titleInfo}>{user?.account}</Text>
-          </Container>
-          <Container horizontal style={styles.titleInfoContainer}>
-            <Text style={styles.title}>Password</Text>
-            <Text style={styles.titleInfo}>***********</Text>
-          </Container>
-          <Container horizontal style={styles.titleInfoContainer}>
-            <Text style={styles.title}>Email</Text>
-            <Text style={styles.titleInfo}>{user?.email}</Text>
-          </Container>
-          <Container horizontal style={styles.titleInfoContainer}>
-            <Text style={styles.title}>Phone</Text>
-            <Text style={styles.titleInfo}>{user?.phone}</Text>
-          </Container>
-          <Container horizontal style={styles.titleInfoContainer}>
-            <Text style={styles.title}>Birthday</Text>
-            <Text style={styles.titleInfo}>{Moment(Number(user?.dateBirth)).format("L")}</Text>
-          </Container>
-          <Container horizontal style={styles.titleInfoContainer}>
-            <Text style={styles.title}>Address</Text>
-            <Text style={styles.titleInfo}>35/1F Ba Diem Street</Text>
-          </Container>
-          <Container horizontal style={styles.titleInfoContainer}>
-            <Text style={styles.title}>Gender</Text>
-            <Text style={styles.titleInfo}>Male</Text>
-          </Container>
-
-        </Container>
-        <Container horizontal style={{ flex: 1, position: "relative", justifyContent: "center" }}>
-          <Button
-            title="Edit user"
-            onPress={() => toggleOverlay()}
-          />
-        </Container>
+        {content}
       </Container>
+
       <ModalChangeUser title={"Chage user's information"} isVisible={visible}
         onBackdropPress={() => { toggleOverlay() }}
         submit={(val: IUserForm) => editUserSubmit(val)}
         message={isMessage}
         onToggleMessage={() => toggleMessage()}
-      ></ModalChangeUser>
+      />
 
       <Image
         source={{ uri: `${accountImage}` }}
-        style={{
-          position: "absolute", width: 100, height: 100, left: width / 2, top: 50, borderRadius: 50,
-          transform: [{ translateX: -50 }]
-        }}
+        style={styles.inforImage}
       />
     </Container>
   )

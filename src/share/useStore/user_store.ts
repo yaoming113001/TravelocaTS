@@ -13,17 +13,17 @@ export const useUserStore = () => {
 
   const storeUser = React.useCallback(async (user: IUserForm) => {
     return await AsyncStore.setItem(STORAGE_KEY, JSON.stringify(user));
-  }, [])
+  }, [user])
 
   const deleteUser = React.useCallback(async () => {
-    return await AsyncStore.clear();
-  }, [])
+    return AsyncStore.setItem(STORAGE_KEY, JSON.stringify(userHelper));
+  }, [user])
 
 
   const getUser = React.useCallback(async () => {
     const value = await AsyncStore.getItem(STORAGE_KEY);
     !isNil(value) ? setUser(JSON.parse(value)) : null;
-  }, [])
+  }, [user])
 
   React.useEffect(() => {
     getUser()

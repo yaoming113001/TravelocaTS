@@ -8,7 +8,6 @@ import { Container } from "../../../share/styles/container"
 import styles from "../../../share/styles/global_style"
 import { SignInStore } from "../store/sign_in_store"
 import * as Yup from "yup";
-import { StatusBar } from "expo-status-bar";
 import { ScrollView } from "react-native-gesture-handler";
 import { userLoginHelper } from "../../../share/helper/userHelper";
 import { Message } from "../../../share/message/message";

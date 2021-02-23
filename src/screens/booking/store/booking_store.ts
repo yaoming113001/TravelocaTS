@@ -1,6 +1,5 @@
 import React from "react"
 import { createContainer } from "unstated-next"
-import { ItemHelper } from "../../../share/helper/postHelper";
 import { Item } from "../../../share/types/item";
 import { GlobalStore } from "../../../share/useStore/global_store";
 
@@ -9,8 +8,6 @@ export const useCartStore = () => {
   const { list, deleteItemCartStore } = GlobalStore.useContainer().asyncStore;
   const { user } = GlobalStore.useContainer().userStore;
   const { getPost, deletePost } = GlobalStore.useContainer().usePostAPI;
-  const [visible, setVisible] = React.useState(false);
-  const [post, setPost] = React.useState<Item>(ItemHelper);
 
   const deleteItemStoreCart = React.useCallback((item: Item) => {
     deleteItemCartStore(item);
@@ -23,11 +20,11 @@ export const useCartStore = () => {
     result.then(() => {
       getPostFromApi()
     })
-  }, [list, listItem])
+  }, [setListItem, list])
 
   const deleteItemCart = React.useCallback((item: Item) => {
     user.id === 0 ? deleteItemStoreCart(item) : deleteItemUserCart(item)
-  }, [setListItem, list, listItem])
+  }, [setListItem, list])
 
   const getPostFromApi = React.useCallback(async () => {
     const result = getPost(`history-bookmark?id=${user.id}`);
@@ -44,7 +41,7 @@ export const useCartStore = () => {
     showListCart()
   }, [list]);
 
-  return { deleteItemCart, listItem, visible, post, setVisible, setPost };
+  return { deleteItemCart, listItem };
 }
 
 export const CartStore = createContainer(useCartStore);

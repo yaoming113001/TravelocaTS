@@ -10,14 +10,16 @@ export default StyleSheet.create({
     borderRadius: 8
   },
   itemContainer: {
-    marginBottom: 20,
+    marginBottom: 10,
     width: "100%",
     marginRight: 10,
     borderRadius: 10,
     padding: 2,
     borderWidth: 3,
     borderColor: "#f73b4c",
-    backgroundColor: "white"
+    backgroundColor: "white",
+    height: height / 3 - 40,
+    justifyContent: "space-around"
   },
   itemTitle: {
     fontSize: 18,

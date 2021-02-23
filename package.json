@@ -33,9 +33,12 @@
     "react-native-keyboard-avoiding-scroll-view": "^1.0.1",
     "react-native-reanimated": "^1.13.2",
     "react-native-screens": "^2.16.1",
+    "react-native-swipe-gestures": "^1.0.5",
+    "react-native-swipe-list-view": "^3.2.6",
     "react-native-toast-message": "^1.4.7",
     "react-native-web": "~0.13.12",
     "react-number-format": "^4.4.4",
+    "react-swipeable": "^6.0.1",
     "unstated-next": "^1.1.0",
     "yup": "^0.32.8"
   },

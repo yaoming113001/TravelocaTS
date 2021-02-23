@@ -1,4 +1,6 @@
-export interface Item {
+import { Item } from "../types/item"
+
+export const ItemHelper: Item = {
   address: "string",
   city: 0,
   content: "string",
@@ -6,7 +8,7 @@ export interface Item {
   id: 0,
   image: "string",
   is_active: 0,
-  phone0: 0,
+  phoneNumber: 0,
   price: 0,
   title: "string",
   type: 0,

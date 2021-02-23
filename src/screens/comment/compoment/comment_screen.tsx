@@ -8,31 +8,32 @@ import styles from "../../../share/styles/global_style"
 import detailStyle from "./comment_style"
 import { IButton } from "../../../share/base_button/base_button"
 import { BaseInput } from "../../../share/base_input/base_input"
-import { FlatList } from "react-native-gesture-handler"
+import { FlatList, ScrollView } from "react-native-gesture-handler"
 import { CommentStore } from "../store/comment_store"
+import { ICommnet } from "../../../share/types/comment"
+import { Message } from "../../../share/message/message"
 
 export interface IID {
   params: number
 }
 
 export const CommentScreen: React.FunctionComponent<HomeStackParamList<"Detail">> = props => {
-  const { comments, voteNumber, setVoteNumber, comment, setComment, postComment } = CommentStore.useContainer()
+  const { comments, voteNumber, setVoteNumber, comment, setComment, postComment, isVisible, toggle, navigation } = CommentStore.useContainer()
 
-  const commentContainer = () => {
+  const commentContainer = (comment: ICommnet) => {
     return (
       <Container style={detailStyle.commentSession}>
         <Container horizontal style={{ justifyContent: "space-between" }}>
-          <Text style={{ fontSize: 16, fontStyle: "italic" }}>Nguyen Phuoc Duc</Text>
+          <Text style={{ fontSize: 16, fontStyle: "italic" }}>{comment.name}</Text>
           <Rating
             type='heart'
-            startingValue={4}
+            startingValue={comment.vote}
             imageSize={20}
             readonly
           />
         </Container>
         <Container horizontal >
-          <Text style={detailStyle.comment}>Khach san dep lam</Text>
-
+          <Text style={detailStyle.comment}>{comment.comment}</Text>
         </Container>
       </Container>
     )
@@ -45,8 +46,44 @@ export const CommentScreen: React.FunctionComponent<HomeStackParamList<"Detail">
         data={comments}
         keyExtractor={comments => comments.id.toString()}
         renderItem={({ item }) => (
-          commentContainer()
+          commentContainer(item)
         )} />
+    )
+  }
+
+  const message = () => {
+    return (
+      <>
+        <Message
+          type={"Add"}
+          title={"Successfully"}
+          isVisible={isVisible}
+          messageContent={"Your comment has been added ssuccessfully!"}
+          onBackdropPress={() => { toggle() }}
+          yesButton={true}
+          noButton={false}
+          submit={() => { navigation.goBack() }}
+        />
+      </>
+    )
+  }
+
+  const button = () => {
+    return (
+      <IButton
+        title={"Comment"}
+        disable={!comment.length ? true : false}
+        typeButton={"outline"}
+        backgroundColor="#434567"
+        icon={"comments"}
+        addStyle={true}
+        fontColor="white"
+        iconSize={25}
+        titleSize={18}
+        iconRight
+        onSubmit={() => { postComment() }}
+        borderRadius={10}
+        width={100} />
     )
   }
 
@@ -59,6 +96,7 @@ export const CommentScreen: React.FunctionComponent<HomeStackParamList<"Detail">
         <Container style={detailStyle.commentContainer}>
           <BaseInput
             numOfLine={3}
+            placeholder="Comment your opion"
             multiLine={true}
             height={80}
             value={comment}
@@ -72,22 +110,13 @@ export const CommentScreen: React.FunctionComponent<HomeStackParamList<"Detail">
               onFinishRating={(val) => setVoteNumber(val)}
             />
           </Container>
-          <IButton
-            title={"Comment"}
-            typeButton={"outline"}
-            backgroundColor="#434567"
-            icon={"comments"}
-            addStyle={true}
-            fontColor="white"
-            iconSize={25}
-            titleSize={18}
-            iconRight
-            onSubmit={() => { postComment() }}
-            borderRadius={10}
-            width={100} />
+          {button()}
         </Container>
-        {loadComments()}
+        <Container style={{ height: "55%" }}>
+          {loadComments()}
+        </Container>
       </Container>
+      {message()}
     </Container>
   )
 }

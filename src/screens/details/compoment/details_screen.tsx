@@ -1,19 +1,17 @@
 import React from "react"
 import { Image, Text } from "react-native"
-import { Button, Rating } from "react-native-elements"
+import { Rating } from "react-native-elements"
 import { Header } from "../../../share/header/header"
 import { HomeStackParamList } from "../../../navigation/RouteParramList"
 import { Container } from "../../../share/styles/container"
 import styles from "../../../share/styles/global_style"
 import { DetailsStore } from "../store/details_store"
-import { useNavigation } from "@react-navigation/native"
 import { Item } from "../../../share/types/item"
 import detailStyle from "./details_style"
 import { ScrollView } from "react-native-gesture-handler"
 import { Message } from "../../../share/message/message"
 import { ipconfig } from "../../../share/config/config"
 import { IButton } from "../../../share/base_button/base_button"
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 interface IItem {
@@ -25,7 +23,7 @@ interface IItem {
 // }
 
 export const DetailsScreen: React.FunctionComponent<HomeStackParamList<"Detail">> = props => {
-  const { addToCart, isVisible, toggle, moveToComment } = DetailsStore.useContainer()
+  const { addToCart, isVisible, toggle, moveToComment, user } = DetailsStore.useContainer()
   const params = props.route.params as unknown as IItem;
   const item = params.params;
 
@@ -125,6 +123,7 @@ export const DetailsScreen: React.FunctionComponent<HomeStackParamList<"Detail">
         <IButton
           title={"Create comment"}
           typeButton={"outline"}
+          disable={(user.id !== undefined && user.id > 0) ? false : true}
           backgroundColor="#434567"
           icon={"comments"}
           addStyle={true}

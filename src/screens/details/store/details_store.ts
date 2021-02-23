@@ -33,7 +33,7 @@ export const useDetailsStore = () => {
     navigation.navigate("Comment", { params: id })
   }
 
-  return { title, info, addToCart, isVisible, toggle, moveToComment };
+  return { title, info, addToCart, isVisible, toggle, moveToComment, user };
 }
 
 export const DetailsStore = createContainer(useDetailsStore);

@@ -18,5 +18,6 @@ export default StyleSheet.create({
     padding: 10,
   },
   titleComment: { fontSize: 16, fontStyle: "italic" },
-  comment: { fontSize: 17, fontWeight: "bold", marginTop: 5 }
+  comment: { fontSize: 17, fontWeight: "bold", marginTop: 5 },
+  noComment: { fontSize: 24, fontWeight: "bold", textAlign: "center", marginTop: 20 }
 });

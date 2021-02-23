@@ -16,7 +16,6 @@ export const HomeRoutes: React.FunctionComponent = ({ }) => {
       <Stack.Screen name="Cart" component={Cart} />
       <Stack.Screen name="Category" component={Categories} />
       <Stack.Screen name="Comment" component={Comment} />
-
     </Stack.Navigator>
   )
 }

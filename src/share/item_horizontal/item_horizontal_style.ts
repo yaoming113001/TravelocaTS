@@ -22,7 +22,8 @@ export default StyleSheet.create({
   itemTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    padding: 4
+    padding: 4,
+    width: "70%"
   },
   priceTitle: {
     fontSize: 20,

@@ -10,10 +10,9 @@ export interface Route {
 
 export const useCategoriesStore = (initialState: Route | undefined) => {
   const [items, setItem] = React.useState<Item[]>([])
-  const { getPost } = GlobalStore.useContainer().usePostAPI;
+  const { user } = GlobalStore.useContainer().userStore
+  const { getPost, postPost } = GlobalStore.useContainer().usePostAPI;
   const { storeToStorage, list } = GlobalStore.useContainer().asyncStore;
-
-  const navigation = useNavigation()
 
   const getPostFromApi = React.useCallback(async (page: string) => {
     const result = getPost("get-homepage");
@@ -32,9 +31,18 @@ export const useCategoriesStore = (initialState: Route | undefined) => {
     return value;
   }
 
-  const addToCart = React.useCallback((item: Item) => {
+  const addToCartStore = React.useCallback((item: Item) => {
     storeToStorage(item);
-  }, [storeToStorage])
+  }, [list])
+
+  const addToCartAccount = React.useCallback(async (item: Item) => {
+    await postPost("book-mark", { user: user.id, post: item.id });
+  }, [])
+
+  const addToCart = React.useCallback((item: Item) => {
+    user.id !== 0 ? addToCartAccount(item) : addToCartStore(item)
+  }, [addToCartAccount, addToCartStore])
+
 
   React.useEffect(() => {
     if (initialState !== undefined) {

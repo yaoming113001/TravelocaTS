@@ -2,6 +2,7 @@ import { Icon, Input } from "react-native-elements"
 import React from "react"
 import styles from "./base_input_style"
 import { Keyboard } from "react-native"
+import { isUndefined } from "lodash"
 
 export interface IBaseInputProps {
   isRequired?: boolean;
@@ -19,12 +20,24 @@ export interface IBaseInputProps {
   onPress?: () => void;
   dontShowKeyboard?: boolean;
   secure?: boolean
+  numOfLine?: number;
+  multiLine?: boolean;
+  height?: number
 }
 
 export const BaseInput: React.FunctionComponent<IBaseInputProps> = props => {
   const disableKeyboard = () => {
     props.dontShowKeyboard ? Keyboard.dismiss() : null
   }
+
+  const heightOfInput = () => {
+    if (props.height !== undefined) {
+      return props.height;
+    } else {
+      return 20
+    }
+  }
+
   return (
     <>
       <Input
@@ -36,9 +49,11 @@ export const BaseInput: React.FunctionComponent<IBaseInputProps> = props => {
         errorStyle={{ color: 'red' }}
         onFocus={() => { disableKeyboard() }}
         onBlur={props.onLostFocus}
-        inputStyle={{ fontSize: 14 }}
+        inputStyle={{ fontSize: 16, height: heightOfInput() }}
         onTouchEnd={props.onPress}
         secureTextEntry={props.secure}
+        numberOfLines={props.numOfLine}
+        multiline={props.multiLine}
       />
     </>
   )

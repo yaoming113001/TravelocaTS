@@ -4,17 +4,15 @@ import { Item } from "../../../share/types/item";
 import { GlobalStore } from "../../../share/useStore/global_store";
 
 export const useCartStore = () => {
-
   const [listItem, setListItem] = React.useState<Item[]>([]);
   const { list, deleteItemCartStore } = GlobalStore.useContainer().asyncStore;
   const { user } = GlobalStore.useContainer().userStore;
   const { getPost, deletePost } = GlobalStore.useContainer().usePostAPI;
 
-
   const deleteItemStoreCart = React.useCallback((item: Item) => {
     deleteItemCartStore(item);
     setListItem(list)
-  }, [setListItem, list])
+  }, [list])
 
   const deleteItemUserCart = React.useCallback((item: Item) => {
     const postItem = { data: { id_user: user.id, id_post: item.id } };
@@ -37,7 +35,7 @@ export const useCartStore = () => {
 
   const showListCart = React.useCallback(() => {
     user.id === 0 ? setListItem(list) : getPostFromApi()
-  }, [])
+  }, [list])
 
   React.useEffect(() => {
     showListCart()

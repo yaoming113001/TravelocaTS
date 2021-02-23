@@ -16,31 +16,31 @@ export const useAsyncStore = () => {
         const jsonObject: Item[] = JSON.parse(result);
         listCart = jsonObject;
       }
-      if(!isNil(result) && listCart.find(x => x.id === item.id)){
-          return;
+      if (!isNil(result) && listCart.find(x => x.id === item.id)) {
+        return;
       }
       listCart.push(item);
       setList(listCart)
       return await AsyncStore.setItem(STORAGE_KEY, JSON.stringify(listCart));
-      })
+    })
 
   }, [setList, list])
 
-  const deleteItemCartStore = React.useCallback(async (item:Item)=>{
+  const deleteItemCartStore = React.useCallback(async (item: Item) => {
     let listCart: Item[] = [];
     await AsyncStore.getItem(STORAGE_KEY).then(async result => {
       if (!isNil(result)) {
         const jsonObject: Item[] = JSON.parse(result);
         listCart = jsonObject;
       }
-      let deleteObjectIndex= list.indexOf(item);
-      if(deleteObjectIndex>-1){
+      let deleteObjectIndex = list.indexOf(item);
+      if (deleteObjectIndex > -1) {
         listCart.splice(deleteObjectIndex, 1);
         setList(listCart)
         return await AsyncStore.setItem(STORAGE_KEY, JSON.stringify(listCart));
       }
     })
-  },[ list])
+  }, [list])
 
 
   const readStorage = React.useCallback(async () => {
@@ -52,5 +52,5 @@ export const useAsyncStore = () => {
     readStorage()
   }, []);
 
-  return { storeToStorage, readStorage, list, deleteItemCartStore };
+  return { storeToStorage, readStorage, list, deleteItemCartStore, setList };
 }

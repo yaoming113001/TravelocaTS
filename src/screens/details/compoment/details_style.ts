@@ -8,6 +8,7 @@ export default StyleSheet.create({
     width: "100%",
     height: 150,
     borderRadius: 15,
+    marginBottom: 5
   },
   ratingContainerDetail: {
     justifyContent: "space-between",
@@ -67,4 +68,19 @@ export default StyleSheet.create({
   contentlDetail: {
     fontSize: 18,
   },
+  commentContainer: { height: 200, marginBottom: 10 },
+  ratingCommentContainer: {
+    backgroundColor: "white",
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 10
+  },
+  commentSession: {
+    marginTop: 10,
+    backgroundColor: "white",
+    borderRadius: 10,
+    padding: 10,
+  },
+  titleComment: { fontSize: 16, fontStyle: "italic" },
+  comment: { fontSize: 17, fontWeight: "bold", marginTop: 5 }
 });

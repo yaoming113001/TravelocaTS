@@ -7,6 +7,7 @@ import { Item } from "../types/item"
 import styles from "./item_vertical_style"
 import NumberFormat from 'react-number-format';
 import { Message } from "../message/message"
+import { ipconfig } from "../config/config"
 
 interface IItem {
   item: Item;
@@ -26,7 +27,7 @@ export const ItemVertical: React.FunctionComponent<IItem> = props => {
     <Container style={styles.itemContainer}>
       <TouchableOpacity onPress={() => props.moveToDeteil()} style={{ height: 150 }}>
         <Image
-          source={{ uri: `${props.item.image}` }}
+          source={{ uri: `${ipconfig}/${props.item.image.replace("public", "")}` }}
           style={styles.itemImage}
         />
       </TouchableOpacity>

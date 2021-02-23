@@ -2,6 +2,7 @@ import React from "react"
 import { Text, Image } from "react-native"
 import { Button, Icon, Rating } from "react-native-elements"
 import { TouchableOpacity } from "react-native-gesture-handler"
+import { ipconfig } from "../config/config"
 import { Message } from "../message/message"
 import { Container } from "../styles/container"
 import { Item } from "../types/item"
@@ -26,12 +27,12 @@ export const ItemHorizontal: React.FunctionComponent<IItem> = props => {
     <Container style={styles.itemContainer}>
       <TouchableOpacity onPress={() => props.moveToDeteil()} style={{ height: 90 }}>
         <Image
-          source={{ uri: `${props.item.image}` }}
+          source={{ uri: `${ipconfig}/${props.item.image.replace("public", "")}` }}
           style={styles.itemImage}
         />
       </TouchableOpacity>
       <Container horizontal style={styles.justifyContainer}>
-        <Text style={styles.itemTitle} numberOfLines={1}>{props.item.title}</Text>
+        <Text style={styles.itemTitle} numberOfLines={2}>{props.item.title}</Text>
         <Text style={styles.priceTitle} numberOfLines={1}>{props.item.price}$</Text>
       </Container>
       <Container horizontal style={styles.justifyContainer}>
@@ -39,6 +40,7 @@ export const ItemHorizontal: React.FunctionComponent<IItem> = props => {
           type='heart'
           startingValue={props.item.vote}
           imageSize={26}
+          readonly={true}
         />
         <Button
           icon={

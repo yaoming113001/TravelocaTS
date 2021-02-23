@@ -28,7 +28,7 @@ export default StyleSheet.create({
         marginRight: 10,
         borderRadius: 10,
         padding: 2,
-        borderWidth: 3,
+        borderWidth: 2,
         borderColor: "#f73b4c"
     },
     imageSession: {

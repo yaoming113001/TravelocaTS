@@ -44,6 +44,19 @@ export const InformationScreen: React.FunctionComponent<RouteStackParamList<"Dra
     )
   }
 
+  const userImage = () => {
+    return (
+      <>
+        <Image
+          source={{ uri: `${accountImage}` }}
+          style={styles.inforImage}
+        />
+      </>
+    )
+  }
+
+  const showImage = user.id !== 0 ? userImage() : null
+
   const content = user.id !== 0 ? logged() : hasntLoggin()
   return (
     <Container style={{ flex: 1 }}>
@@ -62,10 +75,8 @@ export const InformationScreen: React.FunctionComponent<RouteStackParamList<"Dra
         onToggleMessage={() => toggleMessage()}
       />
 
-      <Image
-        source={{ uri: `${accountImage}` }}
-        style={styles.inforImage}
-      />
+      {showImage}
+
     </Container>
   )
 }

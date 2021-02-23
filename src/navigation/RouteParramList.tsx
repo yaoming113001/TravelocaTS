@@ -13,6 +13,7 @@ export type RouteHomeParamList = {
   Detail: undefined;
   Cart: undefined;
   Category: undefined;
+  Comment: undefined
 }
 
 

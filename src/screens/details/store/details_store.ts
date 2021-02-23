@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react"
 import { createContainer } from "unstated-next"
 import { Item } from "../../../share/types/item";
@@ -8,15 +9,31 @@ export const useDetailsStore = () => {
   const [info] = React.useState(" Please sign in to continue");
   const { storeToStorage, list } = GlobalStore.useContainer().asyncStore;
   const [isVisible, setVisible] = React.useState<boolean>(false)
+  const { postPost } = GlobalStore.useContainer().usePostAPI;
+  const { user } = GlobalStore.useContainer().userStore;
+  const navigation = useNavigation();
 
   const toggle = React.useCallback(() => {
     setVisible(!isVisible)
   }, [isVisible])
 
-  const addToCart = React.useCallback((item: Item) => {
+  const addToCartStore = React.useCallback((item: Item) => {
     storeToStorage(item);
-  }, [storeToStorage])
-  return { title, info, addToCart, isVisible, toggle };
+  }, [list])
+
+  const addToCartAccount = React.useCallback(async (item: Item) => {
+    await postPost("book-mark", { user: user.id, post: item.id });
+  }, [])
+
+  const addToCart = React.useCallback((item: Item) => {
+    user.id !== 0 ? addToCartAccount(item) : addToCartStore(item)
+  }, [addToCartAccount, addToCartStore])
+
+  const moveToComment = (id: number) => {
+    navigation.navigate("Comment", { params: id })
+  }
+
+  return { title, info, addToCart, isVisible, toggle, moveToComment };
 }
 
 export const DetailsStore = createContainer(useDetailsStore);

@@ -20,6 +20,7 @@ export const TimeBooking: React.FunctionComponent<ITimeBooking> = props => {
           <DatePicker
             title="Pick a date"
             initialValue={props.date}
+            minDate={new Date()}
             onDateChanged={(val) => props.setDate(new Date(Number(val)))}
           />
         </Container>

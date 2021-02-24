@@ -1,14 +1,14 @@
 import React from "react"
-import { RouteStackParamList } from "../../navigation/RouteParramList"
-import { CartScreen } from "./compoment/cart_screen"
-import { CartStore } from "./store/cart_store"
+import { HomeStackParamList } from "../../navigation/RouteParramList"
+import { BookingScreen } from "./compoment/booking_screen"
+import { BookingStore } from "./store/booking_store"
 
 
 
-export const Cart: React.FunctionComponent<RouteStackParamList<"SignIn">> = props => {
+export const Booking: React.FunctionComponent<HomeStackParamList<"Booking">> = props => {
   return (
-    <CartStore.Provider>
-      <CartScreen {...props} />
-    </CartStore.Provider>
+    <BookingStore.Provider>
+      <BookingScreen {...props} />
+    </BookingStore.Provider>
   )
 }

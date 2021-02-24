@@ -27,7 +27,7 @@ export const CategoriesScreen: React.FunctionComponent<HomeStackParamList<"Categ
           data={items}
           keyExtractor={item => item.id.toString()}
           renderItem={({ item }) => (
-            <ItemHorizontal item={item} existInCart={true} isCart={false}
+            <ItemHorizontal item={item} existInCart={true} isCart={false} showMessage={true}
               moveToDeteil={() => navigation.navigate("Detail", { params: item })}
               deleteItem={() => { }} addCart={() => addToCart(item)} />
           )} />

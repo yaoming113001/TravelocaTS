@@ -15,6 +15,8 @@ interface IItem {
   addCart: () => void;
   deleteItem: () => void;
   isCart: boolean;
+  showMessage: boolean;
+  submitWithoutMessage?: () => void;
 }
 
 export const ItemHorizontal: React.FunctionComponent<IItem> = props => {
@@ -51,14 +53,14 @@ export const ItemHorizontal: React.FunctionComponent<IItem> = props => {
               color={props.existInCart ? "red" : "gray"}
             />
           }
-          onPress={() => { setVisible(true) }}
+          onPress={!props.showMessage ? props.submitWithoutMessage : toggleOverlay}
           buttonStyle={styles.iconItem}
         />
       </Container>
       <Message
         type={props.isCart ? "Delete" : "Add"}
         title={props.isCart ? "Delete item" : "Add item successfully"}
-        isVisible={visible}
+        isVisible={props.showMessage ? visible : false}
         messageContent={props.isCart ? "Do you really want to delete item from the cart ?" : "You have added item successfully!"}
         onBackdropPress={() => { toggleOverlay() }}
         yesButton={true}

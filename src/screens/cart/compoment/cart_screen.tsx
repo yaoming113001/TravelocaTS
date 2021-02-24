@@ -22,17 +22,17 @@ export const CartScreen: React.FunctionComponent<HomeStackParamList<"Cart">> = p
         data={listItem}
         keyExtractor={item => item.id.toString()}
         renderItem={({ item }) => (
-          <>
-            <ItemHorizontal
-              item={item}
-              moveToDeteil={() => {
-                navigation.navigate("Detail", { params: item })
-              }}
-              existInCart={true}
-              deleteItem={() => { }}
-              isCart={true}
-              addCart={() => { }} />
-          </>
+          <ItemHorizontal
+            showMessage={false}
+            item={item}
+            moveToDeteil={() => {
+              navigation.navigate("Detail", { params: item })
+            }}
+            existInCart={true}
+            deleteItem={() => { }}
+            isCart={false}
+            addCart={() => { }}
+            submitWithoutMessage={() => props.navigation.navigate("Booking")} />
         )}
         renderHiddenItem={({ item }) => (
           <View style={cartStyle.extentButtonContainer}>

@@ -32,7 +32,7 @@ export const CartScreen: React.FunctionComponent<HomeStackParamList<"Cart">> = p
             deleteItem={() => { }}
             isCart={false}
             addCart={() => { }}
-            submitWithoutMessage={() => props.navigation.navigate("Booking")} />
+            submitWithoutMessage={() => navigation.navigate("Booking", { params: item })} />
         )}
         renderHiddenItem={({ item }) => (
           <View style={cartStyle.extentButtonContainer}>

@@ -12,6 +12,7 @@ import { Icon } from 'react-native-elements'
 import { BookingStore } from "../store/booking_store"
 import { TimeBooking } from "./booking_time_booking"
 import { BookingInfo } from "./booking_information"
+import { Message } from "../../../share/message/message";
 
 export interface IBooking {
   params: Item;
@@ -21,7 +22,13 @@ export const BookingScreen: React.FunctionComponent<HomeStackParamList<"Booking"
   const params = props.route.params as unknown as IBooking;
   const item = params.params
 
-  const { date, setDate, booking } = BookingStore.useContainer()
+  const {
+    date,
+    setDate,
+    booking,
+    successVisible,
+    failedVisible,
+    toggleMessage } = BookingStore.useContainer()
 
   const orderButton = () => {
     return (
@@ -50,16 +57,30 @@ export const BookingScreen: React.FunctionComponent<HomeStackParamList<"Booking"
     )
   }
 
+  const message = () => {
+    return (
+      <Message
+        type={successVisible ? "Add" : "Delete"}
+        title={successVisible ? "Booking successfully" : "Booking failed"}
+        isVisible={successVisible || failedVisible}
+        messageContent={successVisible ? "You've booking successfully, back to home!" : "Some error happened, try again later!"}
+        yesButton={true}
+        submit={() => { props.navigation.navigate("Home"), toggleMessage() }}
+      />
+    )
+  }
+
   return (
     <Container style={styles.container}>
       <Header iconTitle={"arrow-left"} mainScreen={false} onPress={() => props.navigation.goBack()} title={"Booking"} />
       <Container style={bookingStyles.bookingContainer}>
         <ScrollView style={{ marginBottom: "23%" }}>
-          <BookingInfo item={item} />
           {dateAndTimeSelection()}
+          <BookingInfo item={item} />
         </ScrollView>
         {orderButton()}
       </Container>
+      {message()}
     </Container >
   )
 }

@@ -31,7 +31,7 @@ export const HomeDiscount: React.FunctionComponent = ({ }) => {
   }
   return (
     <Container style={styles.discountContainer}>
-      <Text style={styles.posterTitle}>Best discount for you $ {list.length}</Text>
+      <Text style={styles.posterTitle}>Best discount for you $</Text>
       {session()}
     </Container>
   )

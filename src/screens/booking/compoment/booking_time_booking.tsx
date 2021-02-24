@@ -13,7 +13,7 @@ export interface ITimeBooking {
 
 export const TimeBooking: React.FunctionComponent<ITimeBooking> = props => {
   return (
-    <Container>
+    <Container style={{ marginBottom: 20 }}>
       <Text style={{ textAlign: "center", marginTop: 15, fontWeight: "bold", fontSize: 24 }}>Time booking</Text>
       <Container horizontal style={{ justifyContent: "space-between" }}>
         <Container style={[bookingStyles.containerInfor, { width: "48%", padding: 0 }]}>

@@ -30,10 +30,15 @@ export const useBookingStore = () => {
     })
   }, [failedVisible, successVisible])
 
+  const toggleMessage = React.useCallback(() => {
+    setSuccessVisible(false);
+    setFailedVisible(false);
+  }, [])
+
   React.useEffect(() => {
   }, []);
 
-  return { onChange, date, setDate, booking };
+  return { onChange, date, setDate, booking, successVisible, setSuccessVisible, failedVisible, toggleMessage, setFailedVisible };
 }
 
 export const BookingStore = createContainer(useBookingStore);

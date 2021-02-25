@@ -1,4 +1,4 @@
-import { Formik, Form } from "formik";
+import { Formik } from "formik";
 import React from "react"
 import { Text, TouchableOpacity } from "react-native"
 import { Button } from "react-native-elements"
@@ -11,20 +11,24 @@ import * as Yup from "yup";
 import { ScrollView } from "react-native-gesture-handler";
 import { userLoginHelper } from "../../../share/helper/userHelper";
 import { Message } from "../../../share/message/message";
+import { useTranslation } from "../../../languages/language_context";
 
-export const SignInSchema = Yup.object().shape({
-  account: Yup.string().required("Account is required"),
-  password: Yup.string().required("Password is required")
-})
 
 
 export const SignInScreen: React.FunctionComponent<RouteStackParamList<"SignIn">> = props => {
-  const { title, info, submit, moveToSignUp, message, setMessage } = SignInStore.useContainer()
+  const { submit, moveToSignUp, message, setMessage } = SignInStore.useContainer()
+  const { signIn, pleaseSignIn, enterAccount, enterPass, forget, register, accountRequired, passwordRequired } = useTranslation()
+
+  const SignInSchema = Yup.object().shape({
+    account: Yup.string().required(accountRequired),
+    password: Yup.string().required(passwordRequired)
+  })
+
   return (
     <ScrollView>
       <Container style={styles.titleContainer}>
-        <Text style={styles.title}> {title}</Text>
-        <Text style={styles.info}> {info}</Text>
+        <Text style={styles.title}> {signIn}</Text>
+        <Text style={styles.info}> {pleaseSignIn}</Text>
       </Container>
       <Formik
         initialValues={userLoginHelper}
@@ -34,7 +38,7 @@ export const SignInScreen: React.FunctionComponent<RouteStackParamList<"SignIn">
           <>
             <Container style={styles.inputContainer}>
               <BaseInput
-                placeholder="Enter account"
+                placeholder={enterAccount}
                 icon="envelope"
                 value={props.values.account}
                 error={props.touched.account ? props.errors.account : ""}
@@ -42,7 +46,7 @@ export const SignInScreen: React.FunctionComponent<RouteStackParamList<"SignIn">
                 onLostFocus={() => props.setFieldTouched("account")}
               />
               <BaseInput
-                placeholder="Enter password"
+                placeholder={enterPass}
                 icon="lock"
                 value={props.values.password}
                 error={props.touched.password ? props.errors.password : ""}
@@ -52,7 +56,7 @@ export const SignInScreen: React.FunctionComponent<RouteStackParamList<"SignIn">
               />
               <Container style={styles.forgetContainer}>
                 <TouchableOpacity>
-                  <Text style={styles.forget}>FORGET</Text>
+                  <Text style={styles.forget}>{forget}</Text>
                 </TouchableOpacity>
               </Container>
 
@@ -65,7 +69,7 @@ export const SignInScreen: React.FunctionComponent<RouteStackParamList<"SignIn">
                 onPress={() => props.handleSubmit()}
               />
               <TouchableOpacity onPress={() => moveToSignUp(props)}>
-                <Text style={styles.signUpTitle}>Sign up</Text>
+                <Text style={styles.signUpTitle}>{register}</Text>
               </TouchableOpacity>
             </Container>
           </>

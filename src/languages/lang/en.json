@@ -1,5 +1,23 @@
 {
   "welcome": "Welcome to Traveloca",
   "signIn": "Sign in",
-  "notNow": "Not right now"
+  "notNow": "Not right now",
+  "pleaseSignIn": "Please sign in to continuous",
+  "enterAccount": "Enter account",
+  "enterPass": "Enter password",
+  "register": "Register",
+  "forget": "Forget password",
+  "pleaseRegister": "Please register to sign in",
+  "enterEmail": "Enter email",
+  "enterName": "Enter full name",
+  "enterPhone": "Enter phone number",
+  "enterSex": "Enter gender",
+  "accountRequired": "Account is required",
+  "passwordRequired": "Password is required",
+  "emailRequired": "Email is required",
+  "invalidEmail": "Invalid email",
+  "phoneRequired": "Phone number is not valid",
+  "invalidPhone": "Phone number is not valid",
+  "nameRequired": "Full name is required",
+  "sexRequired": "Gender of birth is required"
 }

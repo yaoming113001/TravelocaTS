@@ -6,8 +6,6 @@ import { GlobalStore } from "../../../share/useStore/global_store";
 
 export const useSignUpStore = () => {
   const navigation = useNavigation()
-  const [title] = React.useState("Sign up");
-  const [info] = React.useState(" Please sign up to continue");
   const [isVisible, setVisible] = React.useState<boolean>(false)
   const [account, setAccount] = React.useState<string>("")
   const [code, setCode] = React.useState<string>("");
@@ -44,8 +42,6 @@ export const useSignUpStore = () => {
   }, [])
 
   return {
-    title,
-    info,
     submitRegister,
     moveToSignIn,
     toggle,

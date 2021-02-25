@@ -3,11 +3,9 @@ import * as RNLocalize from "react-native-localize";
 import Index from '..';
 import en from './lang/en.json';
 import viet from './lang/viet.json';
+import { LanguageType } from './language_type';
 
-type LanguageContextType = {
-  welcome: string,
-  signIn: string,
-  notNow: string,
+export interface LanguageContextType extends LanguageType {
   changeLanguage: () => void
 }
 

@@ -11,33 +11,26 @@ import { userRegisterHelper } from "../../../share/helper/userHelper";
 import { UserFormScreen } from "../../../share/form/form_user_auth";
 import { ActivePopup } from "./active_popup";
 import { Message } from "../../../share/message/message";
+import { useTranslation } from "../../../languages/language_context";
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
-export const SignUpSchema = Yup.object().shape({
-  account: Yup.string().required("Account is required"),
-  password: Yup.string().required("Password is required"),
-  email: Yup.string().required("Email is required").email("Invalid email"),
-  phone: Yup.string().required("Phone number is not valid").matches(phoneRegExp, "Phone number is not valid"),
-  name: Yup.string().required("Full name is required"),
-  sex: Yup.string().required("Gender of birth is required"),
-})
-
 
 export const SignUpScreen: React.FunctionComponent<RouteStackParamList<"SignIn">> = ({ }) => {
+  const { accountRequired, passwordRequired, emailRequired, invalidEmail, phoneRequired, invalidPhone,
+    nameRequired, sexRequired, register, pleaseRegister, signIn } = useTranslation();
+
+  const SignUpSchema = Yup.object().shape({
+    account: Yup.string().required(accountRequired),
+    password: Yup.string().required(passwordRequired),
+    email: Yup.string().required(emailRequired).email(invalidEmail),
+    phone: Yup.string().required(phoneRequired).matches(phoneRegExp, invalidPhone),
+    name: Yup.string().required(nameRequired),
+    sex: Yup.string().required(sexRequired),
+  })
   const {
-    title,
-    info,
-    submitRegister,
-    moveToSignIn,
-    isVisible,
-    toggle,
-    code,
-    setCode,
-    submitCode_,
-    message,
-    setMessage
-  } = SignUpStore.useContainer()
+    submitRegister, moveToSignIn, isVisible, toggle, code, setCode, submitCode_, message, setMessage } = SignUpStore.useContainer()
+
 
   return (
     <KeyboardAvoidingView
@@ -46,8 +39,8 @@ export const SignUpScreen: React.FunctionComponent<RouteStackParamList<"SignIn">
     >
       <Container>
         <Container style={[styles.titleContainer, { height: 100 }]}>
-          <Text style={styles.title}> {title}</Text>
-          <Text style={styles.info}> {info}</Text>
+          <Text style={styles.title}> {register}</Text>
+          <Text style={styles.info}> {pleaseRegister}</Text>
         </Container>
         <Formik
           initialValues={userRegisterHelper}
@@ -59,13 +52,13 @@ export const SignUpScreen: React.FunctionComponent<RouteStackParamList<"SignIn">
                 <UserFormScreen {...props} />
                 <Container style={styles.buttonContainer}>
                   <Button
-                    title="Sign up"
+                    title={signIn}
                     buttonStyle={styles.button}
                     titleStyle={styles.buttonTitle}
                     onPress={() => props.handleSubmit()}
                   />
                   <TouchableOpacity onPress={moveToSignIn}>
-                    <Text style={styles.signUpTitle}>Sign in</Text>
+                    <Text style={styles.signUpTitle}>{register}</Text>
                   </TouchableOpacity>
                 </Container>
               </ScrollView>

@@ -1,5 +1,23 @@
 {
   "welcome": "Chào mừng bạn đến với Traveloca",
   "signIn": "Đăng nhập",
-  "notNow": "Không phải bây giờ"
+  "notNow": "Không phải bây giờ",
+  "pleaseSignIn": "Vui lòng đăng nhập để tiếp tục",
+  "enterAccount": "Nhập tên tài khoản",
+  "enterPass": "Nhập mật khẩu",
+  "register": "Đăng ký",
+  "forget": "Quên mật khẩu",
+  "pleaseRegister": "Vui lòng đăng ký để đăng nhập vào hệ thống",
+  "enterEmail": "Nhập email",
+  "enterName": "Nhập họ và tên",
+  "enterPhone": "Nhập số điện thoại",
+  "enterSex": "Nhập giới tính",
+  "accountRequired": "Vui lòng nhập tên tài khoản",
+  "passwordRequired": "Vui lòng nhập mật khẩu",
+  "emailRequired": "Vui lòng nhập email",
+  "invalidEmail": "Email không hợp lệ",
+  "phoneRequired": "Vui lòng nhập số điện thoại",
+  "invalidPhone": "Số điện thoại không hợp lệ",
+  "nameRequired": "Vui lòng nhập họ và tên",
+  "sexRequired": "Vui lòng chọn giới tính"
 }

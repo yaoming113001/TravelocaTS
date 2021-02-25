@@ -1,16 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
 import React from "react"
 import { createContainer } from "unstated-next"
 import { IUserForm } from "../../../share/types/user_type";
 import { GlobalStore } from "../../../share/useStore/global_store";
-import jwt_decode from "jwt-decode";
-import { isUndefined } from "lodash";
 
 export const useSignInStore = () => {
   const navigation = useNavigation()
-  const [title] = React.useState("Sign in");
-  const [info] = React.useState(" Please sign in to continue");
   const [message, setMessage] = React.useState<string>("")
 
   const { storeUser, user } = GlobalStore.useContainer().userStore;
@@ -36,7 +31,7 @@ export const useSignInStore = () => {
     user.account?.length ? navigation.navigate("Drawer") : null
   }, [user]);
 
-  return { title, info, submit, moveToSignUp, message, setMessage };
+  return { submit, moveToSignUp, message, setMessage };
 }
 
 export const SignInStore = createContainer(useSignInStore);

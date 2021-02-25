@@ -7,7 +7,7 @@ export const useWelcomeStore = () => {
   const navigation = useNavigation()
   const { user } = GlobalStore.useContainer().userStore;
 
-  const [imageBanner] = React.useState<string>("https://lh3.googleusercontent.com/proxy/6YOX-pecLDwbCZeKh5Z1_kY6lA5DcbEud1nOpIr6bqIHmdg6UMD_qxhtQqYksZVDpnk_RSf4aRyEZjDpOFy1wAN6PjzYmicPk1svFkfGREJp-6pqwlCttyKnELDtegHcZ_A")
+  const [imageBanner] = React.useState<string>("https://tour.dulichvietnam.com.vn/uploads/tour/1554722331_du-lich-da%20-lat-ngam-hoa-3.jpg")
 
   const moveToHome = () => {
     navigation.navigate("Drawer")

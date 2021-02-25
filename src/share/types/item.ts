@@ -1,4 +1,4 @@
-export interface Item {
+export interface Item extends DateOrder {
   address: string,
   city: number,
   content: string,
@@ -13,8 +13,13 @@ export interface Item {
   vote: number,
 }
 
+export interface DateOrder {
+  date: Date;
+}
+
 export interface Comment {
   id: string;
   title: string;
   rating: number;
 }
+

@@ -19,5 +19,11 @@
   "phoneRequired": "Vui lòng nhập số điện thoại",
   "invalidPhone": "Số điện thoại không hợp lệ",
   "nameRequired": "Vui lòng nhập họ và tên",
-  "sexRequired": "Vui lòng chọn giới tính"
+  "sexRequired": "Vui lòng chọn giới tính",
+  "lifeIsEasy": "Cuộc sống thật dễ dàng",
+  "bestDiscount": "Giảm giá dành cho bạn $",
+  "home": "Trang chủ",
+  "search": "Tìm kiếm",
+  "information": "Thông tin",
+  "traveloca": "Traveloca"
 }

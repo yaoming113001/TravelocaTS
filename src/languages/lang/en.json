@@ -19,5 +19,11 @@
   "phoneRequired": "Phone number is not valid",
   "invalidPhone": "Phone number is not valid",
   "nameRequired": "Full name is required",
-  "sexRequired": "Gender of birth is required"
+  "sexRequired": "Gender of birth is required",
+  "lifeIsEasy": "Life is easy",
+  "bestDiscount": "Best discount for you $",
+  "home": "Home",
+  "search": "Search",
+  "information": "Information",
+  "traveloca": "Traveloca"
 }

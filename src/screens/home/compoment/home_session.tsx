@@ -1,5 +1,5 @@
 import React from "react"
-import { Image, Text, FlatList, ScrollView } from "react-native"
+import { Image, FlatList } from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import { Container } from "../../../share/styles/container"
 import styles from "../home_style"
@@ -7,6 +7,7 @@ import { HomeStore } from "../store/home_store"
 
 export const HomeSession: React.FunctionComponent = ({ }) => {
   const { image, gotoCatetory } = HomeStore.useContainer()
+
   const session = () => {
     return (
       <FlatList

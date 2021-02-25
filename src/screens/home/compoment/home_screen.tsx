@@ -7,16 +7,15 @@ import { HomePoster } from "./home_poster"
 import { HomeDiscount } from "./home_discount"
 import { ScrollView, Text } from "react-native"
 import { useNavigation } from "@react-navigation/native"
-import { HomeStore } from "../store/home_store"
-import { GlobalStore } from "../../../share/useStore/global_store"
+import { useTranslation } from "../../../languages/language_context"
 
 export const HomeScreen: React.FunctionComponent = ({ }) => {
   const navigation = useNavigation()
-  const { list } = GlobalStore.useContainer().asyncStore
+  const { traveloca } = useTranslation()
 
   return (
     <Container style={styles.container}>
-      <Header iconTitle={"heart"} mainScreen={true} title={"Traveloca"} onPress={() => navigation.navigate("Cart")} />
+      <Header iconTitle={"heart"} mainScreen={true} title={traveloca} onPress={() => navigation.navigate("Cart")} />
       <ScrollView style={{ height: "85%" }} showsVerticalScrollIndicator={false}>
         <HomeSession />
         <HomePoster />

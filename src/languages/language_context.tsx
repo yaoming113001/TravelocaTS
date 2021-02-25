@@ -1,5 +1,4 @@
 import React from 'react';
-import * as RNLocalize from "react-native-localize";
 import Index from '..';
 import en from './lang/en.json';
 import viet from './lang/viet.json';
@@ -17,7 +16,7 @@ const languageObj = {
 }
 
 export const LanguageContextProvider: React.FC = ({ children }) => {
-  const [selectedLanguage, setSeletedLanguage] = React.useState('en');
+  const [selectedLanguage, setSeletedLanguage] = React.useState<string>('viet');
 
   const changeLanguage = React.useCallback(() => {
     setSeletedLanguage('viet')

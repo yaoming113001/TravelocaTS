@@ -20,4 +20,11 @@ export interface LanguageType {
   invalidPhone: string,
   nameRequired: string,
   sexRequired: string,
+
+  lifeIsEasy: string,
+  bestDiscount: string,
+  home: string,
+  search: string,
+  information: string,
+  traveloca: string
 }

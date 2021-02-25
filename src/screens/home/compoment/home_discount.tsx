@@ -1,19 +1,18 @@
 import { useNavigation } from "@react-navigation/native"
 import React from "react"
-import { Image, Button, Text } from "react-native"
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler"
-import { RouteHomeParamList } from "../../../navigation/RouteParramList"
+import { Text } from "react-native"
+import { FlatList } from "react-native-gesture-handler"
+import { useTranslation } from "../../../languages/language_context"
 import { ItemVertical } from "../../../share/item_vertical/item_vertical"
 import { Container } from "../../../share/styles/container"
-import { GlobalStore } from "../../../share/useStore/global_store"
 import styles from "../home_style"
 import { HomeStore } from "../store/home_store"
 
 export const HomeDiscount: React.FunctionComponent = ({ }) => {
   const { item, addToCart } = HomeStore.useContainer()
-  const { list } = GlobalStore.useContainer().asyncStore
-
+  const { bestDiscount } = useTranslation();
   const navigation = useNavigation();
+
   const session = () => {
     return (
       <FlatList
@@ -31,7 +30,7 @@ export const HomeDiscount: React.FunctionComponent = ({ }) => {
   }
   return (
     <Container style={styles.discountContainer}>
-      <Text style={styles.posterTitle}>Best discount for you $</Text>
+      <Text style={styles.posterTitle}>{bestDiscount}</Text>
       {session()}
     </Container>
   )

@@ -1,6 +1,6 @@
 import React from "react"
 import { Text, Image, Dimensions } from "react-native"
-import { RouteStackParamList } from "../../../navigation/RouteParramList"
+import { InformationStackParamList } from "../../../navigation/RouteParramList"
 import { Container } from "../../../share/styles/container"
 import { InformationStore, useInformationStore } from "../store/information_store"
 import { Button } from 'react-native-elements';
@@ -9,15 +9,41 @@ import { ModalChangeUser } from "../../../share/modelChangeUser/modalChangeUser"
 import { IUserForm } from "../../../share/types/user_type"
 import { InformationBoard } from "./information_board"
 import { HasntLoggin } from "./no_information"
+import { Icon } from 'react-native-elements'
 
-export const InformationScreen: React.FunctionComponent<RouteStackParamList<"Drawer">> = props => {
-  const { accountImage, coverImage, toggleOverlay, visible, editUserSubmit, isMessage, toggleMessage
-    , navigateToSignIn, navigateToRegister } = InformationStore.useContainer()
+export const InformationScreen: React.FunctionComponent<InformationStackParamList<"Information">> = props => {
+  const {
+    accountImage,
+    coverImage,
+    toggleOverlay,
+    visible,
+    editUserSubmit,
+    isMessage,
+    toggleMessage,
+    navigateToSignIn,
+    navigateToRegister,
+    navigateToHistory
+  } = InformationStore.useContainer()
+
   const { user, deleteUser } = InformationStore.useContainer()
 
   const logged = () => {
     return (
       <>
+        <Container horizontal style={{ marginTop: 5, justifyContent: "space-between" }}>
+          <Icon
+            raised
+            name='truck'
+            type='font-awesome'
+            color='#f50'
+            onPress={() => navigateToHistory()} />
+          <Icon
+            raised
+            name='cog'
+            type='font-awesome'
+            color='gray'
+            onPress={() => console.log('hello')} />
+        </Container>
         <InformationBoard user={user} />
         <Container style={styles.buttonContainer}>
           <Button

@@ -17,6 +17,11 @@ export type RouteHomeParamList = {
   Booking: undefined;
 }
 
+export type RouteInformationParamList = {
+  Information: undefined;
+  History: undefined;
+}
+
 
 export type RouteStackParamList<T extends keyof RouteParramList> = {
   navigation: StackNavigationProp<RouteParramList, T>;
@@ -26,4 +31,8 @@ export type RouteStackParamList<T extends keyof RouteParramList> = {
 export type HomeStackParamList<T extends keyof RouteHomeParamList> = {
   navigation: StackNavigationProp<RouteHomeParamList, T>;
   route: RouteProp<RouteHomeParamList, T>;
+}
+export type InformationStackParamList<T extends keyof RouteInformationParamList> = {
+  navigation: StackNavigationProp<RouteInformationParamList, T>;
+  route: RouteProp<RouteInformationParamList, T>;
 }

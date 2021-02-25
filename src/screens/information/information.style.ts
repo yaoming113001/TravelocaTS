@@ -13,6 +13,7 @@ export default StyleSheet.create({
     margin: 10,
     borderRadius: 10,
     padding: 20,
+    paddingTop: 0,
     flex: 1
   },
   title: { flex: 2, fontSize: 18, fontWeight: "700", color: "#929292" },

@@ -14,7 +14,7 @@ export const InformationBoard: React.FunctionComponent<Iiformation> = props => {
   return (
 
     <Container style={{ flex: 10 }}>
-      <Container style={{ marginTop: 50, marginBottom: 10 }}>
+      <Container style={{ marginBottom: 10 }}>
         <Text style={styles.titleName}>{props.user?.name}</Text>
       </Container>
       <Container horizontal style={styles.titleInfoContainer}>
@@ -45,6 +45,6 @@ export const InformationBoard: React.FunctionComponent<Iiformation> = props => {
         <Text style={styles.title}>Gender</Text>
         <Text style={styles.titleInfo}>{props.user?.sex}</Text>
       </Container>
-    </Container>
+    </Container >
   )
 }

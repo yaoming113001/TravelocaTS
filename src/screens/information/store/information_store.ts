@@ -42,13 +42,17 @@ export const useInformationStore = () => {
     navigation.navigate("SignUp")
   }
 
+  const navigateToHistory = () => {
+    navigation.navigate("History")
+  }
+
   React.useEffect(() => {
     getUser()
   }, [user])
 
   return {
     accountImage, coverImage, inforImage, visible, toggleOverlay, user, editUserSubmit
-    , isMessage, toggleMessage, deleteUser, navigateToSignIn, navigateToRegister
+    , isMessage, toggleMessage, deleteUser, navigateToSignIn, navigateToRegister, navigateToHistory
   };
 }
 

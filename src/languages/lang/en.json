@@ -25,5 +25,7 @@
   "home": "Home",
   "search": "Search",
   "information": "Information",
-  "traveloca": "Traveloca"
+  "traveloca": "Traveloca",
+  "editUser": "Edit user",
+  "loggout": "Logout"
 }

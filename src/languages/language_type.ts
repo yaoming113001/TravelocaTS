@@ -26,5 +26,8 @@ export interface LanguageType {
   home: string,
   search: string,
   information: string,
-  traveloca: string
+  traveloca: string,
+
+  editUser: string,
+  loggout: string
 }

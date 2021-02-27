@@ -3,9 +3,7 @@ import { HomeStackParamList } from "../../navigation/RouteParramList"
 import { HomeScreen } from "./compoment/home_screen"
 import { HomeStore } from "./store/home_store"
 
-
-
-export const Home: React.FunctionComponent<HomeStackParamList<"Home">> = ({ }) => {
+export const Home: React.FunctionComponent<HomeStackParamList<"Home">> = props => {
   return (
     <HomeStore.Provider >
       <HomeScreen />
